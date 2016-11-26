@@ -1,0 +1,48 @@
+/* global */
+$white : #ebebeb;
+$red : #7d0000;
+$yellow : #907822;
+$green : #71a501;
+$background : #171C23;
+$background-transparent : rgba(28, 33, 40, 0.5);
+$background-transparent-2 : rgba(28, 33, 40, 0.25);
+$background-transparent-3 : rgba(28, 33, 40, 0.95);
+
+/* btn */
+$btn-bg : #7ab300;
+$btn-hover-bg : #9ce400;
+
+/* nav */
+$nav-hover-bg : rgba(75, 195, 0, 0.4);
+
+/* alert */
+$alert-success-bg : #2a732a;
+$alert-error-bg : #822323;
+$alert-warning-bg : #907822;
+$alert-info-bg : $btn-bg;
+
+/* login */
+$login-input : #292e37;
+$login-hover : #54585f;
+$login-success : #2e5f2e;
+$login-success-hover : #2f9b2f;
+$login-error : #5f2020;
+$login-error-hover : #9b2424;
+
+/* tabs */
+$tabs-active : #679601;
+$tabs-active-hover : #7eaf01;
+
+/* console */
+$console-date : gray;
+$console-error : red;
+$console-warn : #e2be00;
+$console-debug : #a1ec00;
+
+/* table */
+$table-head : #0c1119;
+
+/* scrollBar */
+$scrollBar-track : #292e37;
+$scrollBar-thumb : $btn-bg;
+$scrollBar-thumb-hover: $btn-hover-bg;

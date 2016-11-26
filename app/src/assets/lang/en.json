@@ -1,0 +1,11 @@
+{
+  "navigation": {
+    "modPacks": "Mods packs",
+    "instances": "Instances",
+    "manage": "Manage",
+    "editor": "Editor",
+    "console": "Console",
+    "settings": "Settings",
+    "logout": "Logout"
+  }
+}

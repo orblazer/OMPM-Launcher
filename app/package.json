@@ -4,9 +4,10 @@
   "description": "The launcher for custom Minecraft ModPacks",
   "main": "electron.js",
   "dependencies": {
+    "electron": "^1.4.8",
+    "jquery": "^3.1.1",
     "less": "^2.7.1",
     "vue": "^2.0.1",
-    "vue-electron": "^1.0.0",
     "vue-i18n": "^4.7.3",
     "vue-resource": "^1.0.3",
     "vue-router": "^2.0.0",
@@ -18,9 +19,11 @@
     "email": "orblazer@relonar.fr",
     "url": "https://twitter.com/orblazer"
   },
-  "contributors": [{
-    "name": "Litarvan",
-    "email": "adrien1975@live.fr"
-  }],
+  "contributors": [
+    {
+      "name": "Litarvan",
+      "email": "adrien1975@live.fr"
+    }
+  ],
   "license": "GPLv3"
 }

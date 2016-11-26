@@ -67,7 +67,7 @@ let config = {
     new ExtractTextPlugin('styles.css'),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: './app/index.ejs',
+      template: './app/index.html',
       title: settings.name
     }),
     new webpack.NoErrorsPlugin()

@@ -1,0 +1,109 @@
+@import "../../assets/style/_colors.scss";
+
+.console {
+  position : relative;
+  height   : 100%;
+
+  & > .content {
+    height : 100%;
+
+    & > .tabs-control {
+      margin-top : 0;
+
+      & > li {
+        width : 50%;
+      }
+    }
+
+    & > .tabs-content {
+      height              : 90.55%;
+      -webkit-user-select : initial; -moz-user-select : initial; -ms-user-select : initial; user-select : initial;
+      cursor              : auto;
+      padding             : 0;
+
+      & > div {
+        height   : 100%;
+        padding  : 5px;
+        overflow : auto;
+
+        .date {
+          color : $console-date
+        }
+        & > .error {
+          color       : $console-error;
+          font-weight : bold;
+        }
+        & > .warn {
+          color : $console-warn;
+        }
+        & > .debug {
+          color : $console-debug
+        }
+      }
+    }
+  }
+
+  & > footer {
+    position         : absolute;
+    bottom           : 0;
+    width            : 100%;
+    display          : flex;
+    justify-content  : space-between;
+    background-color : $background;
+
+    & > button {
+      padding : 5px 6px;
+    }
+
+    & > .selectAutoScroll {
+      display      : flex;
+      margin-right : 25px;
+
+      & > .autoScroll {
+        display          : inline-block;
+        width            : 80px;
+        height           : 24px;
+        margin-left      : 5px;
+        background-color : $table-head;
+        position         : relative;
+
+        &:before {
+          content     : 'Oui';
+          position    : absolute;
+          left        : 7px;
+          z-index     : 0;
+          font-weight : bold;
+        }
+        &:after {
+          content     : 'Non';
+          position    : absolute;
+          right       : 7px;
+          z-index     : 0;
+          font-weight : bold;
+        }
+
+        & > input {
+          display : none
+        }
+
+        & > label {
+          display          : block;
+          width            : 34px;
+          height           : 19px;
+          transition       : left .4s ease;
+          cursor           : pointer;
+          position         : absolute;
+          top              : 2px;
+          left             : 2px;
+          z-index          : 1;
+          background-color : $btn-bg;
+          border-radius    : 2px;
+        }
+
+        & > input[type=checkbox]:checked + label {
+          left : 43px;
+        }
+      }
+    }
+  }
+}

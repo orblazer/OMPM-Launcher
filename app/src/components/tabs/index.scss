@@ -1,0 +1,41 @@
+@import "../../assets/style/_colors.scss";
+
+.tabs {
+  & > .tabs-control {
+    display    : flex;
+    list-style : none;
+    padding    : 0;
+    margin     : 0;
+    overflow   : auto;
+
+    & > li {
+      width         : 100%;
+      padding       : 2px;
+      text-align    : center;
+      cursor        : pointer;
+      border-bottom : 1px solid white;
+      transition    : all .2s;
+
+      &.active {
+        border-bottom-color : $tabs-active;
+
+        &:hover {
+          border-bottom-color : $tabs-active-hover;
+        }
+      }
+
+      &:hover {
+        color               : $green;
+        border-bottom-color : $nav-hover-bg;
+      }
+    }
+  }
+
+  & > .tabs-content {
+    padding : 15px;
+
+    .tabs-content {
+      padding : 0;
+    }
+  }
+}

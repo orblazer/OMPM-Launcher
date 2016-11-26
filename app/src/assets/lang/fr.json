@@ -1,0 +1,29 @@
+{
+  "navigation": {
+    "modPacks": "Pack de mods",
+    "instances": "Instances",
+    "manage": "Gestion",
+    "editor": "Editeur",
+    "console": "Console",
+    "settings": "Paramètres",
+    "logout": "Déconnexion"
+  },
+  "auth": {
+    "logout": "Vous êtes désormais déconnecté."
+  },
+  "console": {
+    "send": "Envoyer les logs.",
+    "autoScroll": "Défilement automatique ?"
+  },
+  "initialize": {
+    "loading": "Chargement...",
+    "checkServer": {
+      "loading": "Connexion au serveur...",
+      "fail": "Impossible de ce connecté au serveur."
+    },
+    "checkUpdate": {
+      "loading": "Recherche de mises à jour...",
+      "upToDate": "Le launcher est à jour."
+    }
+  }
+}

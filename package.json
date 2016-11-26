@@ -23,10 +23,12 @@
     "email": "orblazer@relonar.fr",
     "url": "https://twitter.com/orblazer"
   },
-  "contributors": [{
-    "name": "Litarvan",
-    "email": "adrien1975@live.fr"
-  }],
+  "contributors": [
+    {
+      "name": "Litarvan",
+      "email": "adrien1975@live.fr"
+    }
+  ],
   "license": "GPLv3",
   "devDependencies": {
     "babel-core": "^6.8.0",
@@ -67,10 +69,10 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.26",
     "karma-webpack": "^1.8.0",
-    "less": "^2.7.1",
-    "less-loader": "^2.2.3",
     "mocha": "^3.0.2",
+    "node-sass": "^3.13.0",
     "require-dir": "^0.3.0",
+    "sass-loader": "^4.0.2",
     "spectron": "^3.4.0",
     "style-loader": "^0.13.1",
     "tree-kill": "^1.1.0",

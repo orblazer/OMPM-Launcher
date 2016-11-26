@@ -1,0 +1,118 @@
+@import "./_colors.scss";
+
+html {
+  height : 100%;
+}
+
+body {
+  position            : relative;
+  margin              : 0;
+  padding             : 40px 15px 20px 15px;
+  min-height          : 100%;
+  background          : $background url(../img/background.jpg) no-repeat 0 26px;
+  background-size     : cover;
+  color               : white;
+  font-family         : "Open Sans";
+  -webkit-user-select : none; -moz-user-select : none; -ms-user-select : none; user-select : none;
+  cursor              : default;
+  overflow            : hidden;
+  font-size           : 15px;
+}
+
+* { box-sizing : border-box; }
+
+img {
+  pointer-events : none
+}
+
+a {
+  color           : white;
+  text-decoration : none;
+}
+
+section#app > header, .modal > header {
+  position           : absolute;
+  top                : 0;
+  left               : 0;
+  height             : 26px;
+  width              : 100%;
+  background-image   : url(../img/header.jpg);
+  -webkit-app-region : drag;
+
+  & > h1 {
+    font-size  : 14px;
+    text-align : center;
+    color      : $white;
+    margin     : 6px 0;
+  }
+  & > .action {
+    position           : absolute;
+    height             : 26px;
+    right              : 5px;
+    top                : 0;
+    -webkit-app-region : no-drag;
+
+    & > .btn {
+      position    : relative;
+      width       : 26px;
+      height      : 26px;
+      font-size   : 17px;
+      padding     : 0;
+      color       : gray;
+      font-weight : bold;
+      border      : none;
+      background  : none;
+      outline     : none;
+      cursor      : pointer;
+
+      &:hover {
+        color : white;
+      }
+
+      & > i:not(.fa-minus) {
+        position : absolute;
+        top      : 6px;
+        left     : 6px;
+      }
+      & > i.fa-minus {
+        position : absolute;
+        top      : 11px;
+        left     : 6px;
+      }
+    }
+  }
+}
+
+section#app > header {
+  z-index : 1000;
+}
+
+#app, .container {
+  height : 89vh;
+}
+
+section#app > footer {
+  position   : absolute;
+  bottom     : 0;
+  left       : 0;
+  width      : 100%;
+  text-align : center;
+  font-size  : 13.5px;
+  color      : $white;
+}
+
+section#app > .container {
+  display         : flex;
+  flex-direction  : row;
+  justify-content : space-between;
+
+  & > .navbar {
+    width : 17%;
+  }
+
+  & > .content {
+    background-color : $background-transparent;
+    width            : 82%;
+    overflow         : auto;
+  }
+}

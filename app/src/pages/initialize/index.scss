@@ -1,0 +1,17 @@
+.initialize {
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+  height          : 100%;
+  width           : 90%;
+  margin          : 0 auto;
+
+  & > .progress-bar {
+    height : 35px;
+
+    & > .text {
+      top       : -14px;
+      font-size : 18px;
+    }
+  }
+}
