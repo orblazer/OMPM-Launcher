@@ -21,6 +21,9 @@ i18n(Vue).then(() => {
   const AuthStore = require('./store/AuthStore').default
   const Router = require('./router').default
 
+  /**
+   * Initialize Vue
+   */
   new Vue({
     router: Router(Vue),
     data: {
@@ -50,12 +53,22 @@ i18n(Vue).then(() => {
       LauncherLog.debug('Core is launched')
     },
     methods: {
+      /**
+       * Hide the window
+       */
       window_hide () {
         remote.getCurrentWindow().minimize()
       },
+      /**
+       * Close the window
+       */
       window_close () {
         remote.getCurrentWindow().close()
       },
+
+      /**
+       * Log the computer info
+       */
       logComputerInfo () {
         let platform = process.platform
         const javaHome = process.env.JAVA_HOME
@@ -92,6 +105,9 @@ i18n(Vue).then(() => {
     ...require('./App.vue')
   }).$mount('#app')
 
+  /**
+   * Logout when app is quit
+   */
   remote.app.on('quit', () => {
     AuthStore.dispatch('logout').then(() => {
       this.close(true)

@@ -12,6 +12,12 @@ export default new Vuex.Store({
     alerts: []
   },
   mutations: {
+    /**
+     * Add the alert
+     * @param {Object} state The state
+     * @param {Object} data The alert data
+     * @constructor
+     */
     ALERT (state, data) {
       if ((typeof data !== 'object') && data.id && data.type && data.message && data.timeout) {
         return
@@ -19,6 +25,13 @@ export default new Vuex.Store({
 
       state.alerts.push(data)
     },
+
+    /**
+     * Remove the alert
+     * @param {Object} state The state
+     * @param {String} id The id of alert
+     * @constructor
+     */
     REMOVE (state, id) {
       state.alerts.forEach((alert, index) => {
         if (alert.id === id) {
@@ -34,6 +47,11 @@ export default new Vuex.Store({
     alerts: state => state.alerts
   },
   actions: {
+    /**
+     * Make the alert
+     * @param {Object} store The store
+     * @param {Object} data The alert data
+     */
     alert (store, data) {
       if ((typeof data !== 'object') && (data.message !== '')) {
         return
@@ -58,6 +76,12 @@ export default new Vuex.Store({
       // Commit alert
       store.commit('ALERT', data)
     },
+
+    /**
+     * Remove the alert
+     * @param {Object} store The store
+     * @param {String} id The id of alert
+     */
     remove (store, id) {
       store.commit('REMOVE', id)
     }

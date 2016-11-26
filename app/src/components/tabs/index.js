@@ -27,6 +27,10 @@ export default {
     })
   },
   methods: {
+    /**
+     * Open the tab
+     * @param {String} msg The header of tab (key)
+     */
     open (msg) {
       this.isActive = msg.message
       this.$emit('tab-activated', msg.message)

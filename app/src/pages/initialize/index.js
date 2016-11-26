@@ -33,10 +33,18 @@ export default {
     }, 1000)
   },
   methods: {
+    /**
+     * Increase the progress
+     */
     increaseProgress () {
       this.progress += (1 / this.step) * 100
       remote.getCurrentWindow().setProgressBar(this.progress / 100)
     },
+
+    /**
+     * End the loading
+     * @param {Object} redirect The redirect
+     */
     doneLoading (redirect) {
       if (redirect === undefined) {
         if (this.$parent.$route.query.redirect === '/initialize') {
@@ -50,6 +58,9 @@ export default {
       remote.getCurrentWindow().setProgressBar(0)
     },
 
+    /**
+     * Check the server
+     */
     checkServer () {
       this.status = Vue.t('initialize.checkServer.loading')
       const cantConnect = () => {
@@ -75,6 +86,9 @@ export default {
       }).catch(cantConnect)
     },
 
+    /**
+     * Check the update
+     */
     checkUpdate () {
       this.status = Vue.t('initialize.checkUpdate.loading')
       Vue.http.post(serverUrl + 'version').then((response) => {
@@ -96,11 +110,18 @@ export default {
         console.warn(arguments)
       })
     },
+
+    /**
+     * Download the update
+     */
     downloadUpdate () {
       this.status = 'Téléchargement des mises à jour...'
       // TODO 27/10/2016 Make this !!!!!!
     },
 
+    /**
+     * Get the versions
+     */
     getVersions () {
       this.status = 'Chargement des versions disponnible...'
       VersionsStore.dispatch('initialize').then(() => {
@@ -114,6 +135,10 @@ export default {
         console.error(err)
       })
     },
+
+    /**
+     * Get the mod packs
+     */
     getModPacks () {
       this.status = 'Chargement des packs de mods...'
       ModPacksStore.dispatch('initialize').then(() => {
@@ -127,6 +152,10 @@ export default {
         console.error(err)
       })
     },
+
+    /**
+     * Get the instances
+     */
     getInstances () {
       this.status = 'Chargement des instances...'
       InstancesStore.dispatch('initialize').then(() => {
@@ -141,6 +170,9 @@ export default {
       })
     },
 
+    /**
+     * Get the settings
+     */
     getSettings () {
       this.status = 'Chargement des paramètres...'
       SettingsStore.dispatch('initialize').then(() => {

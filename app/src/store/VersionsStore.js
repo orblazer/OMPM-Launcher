@@ -13,9 +13,22 @@ export default new Vuex.Store({
     mcVersions: []
   },
   mutations: {
+    /**
+     * Set the forge versions
+     * @param {Object} state The state
+     * @param {Object} forgeVersions The forge versions
+     * @constructor
+     */
     SET_FORGEVERSIONS (state, forgeVersions) {
       state.forgeVersions = forgeVersions
     },
+
+    /**
+     * Set the minecraft versions
+     * @param {Object} state The state
+     * @param {Object} mcVersions The minecraft versions
+     * @constructor
+     */
     SET_MCVERSIONS (state, mcVersions) {
       state.mcVersions = mcVersions
     }
@@ -25,6 +38,11 @@ export default new Vuex.Store({
     mcVersions: state => state.mcVersions
   },
   actions: {
+    /**
+     * Initialize the versions
+     * @param {Object} store The store
+     * @return {Promise} The promise of initializing
+     */
     initialize (store) {
       return new Promise((resolve, reject) => {
         sioClient.emit('getAllForgeVersions', (results) => {

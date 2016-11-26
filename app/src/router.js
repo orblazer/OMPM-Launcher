@@ -64,6 +64,9 @@ export default (Vue) => {
     redirect: '/initialize'
   }]
 
+  /**
+   * Instance vue router
+   */
   const router = new VueRouter({
     scrollBehavior: () => ({ y: 0 }),
     routes

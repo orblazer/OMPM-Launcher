@@ -16,17 +16,25 @@ export default new Vuex.Store({
   strict: true,
   state: {
     accessToken: '',
-    auth: null,
-    email: '',
-    password: ''
+    auth: null
   },
   mutations: {
+    /**
+     * Set the authentication
+     * @param {Object} state The state
+     * @param {Object} info The info of player
+     * @constructor
+     */
     LOGIN (state, info) {
       state.accessToken = info.auth.accessToken
       state.auth = info.auth
-      state.email = info.email
-      state.password = info.password
     },
+
+    /**
+     * Remove the authentication
+     * @param {Object} state The state
+     * @constructor
+     */
     LOGOUT (state) {
       state.token = ''
       state.auth = null
@@ -38,6 +46,13 @@ export default new Vuex.Store({
     loggedIn: state => !!state.accessToken
   },
   actions: {
+    /**
+     * Login the player
+     * @param {Object} store The store
+     * @param {String} email The email of account
+     * @param {String} password The password of account
+     * @return {Promise} The promise of login
+     */
     login (store, { email, password }) {
       return new Promise((resolve, reject) => {
         if (!store.getters.loggedIn) {
@@ -58,6 +73,12 @@ export default new Vuex.Store({
         }
       })
     },
+
+    /**
+     * Logout the player
+     * @param {Object} store The store
+     * @return {Promise} The promise of logout
+     */
     logout (store) {
       return new Promise((resolve, reject) => {
         if (store.getters.loggedIn) {

@@ -52,14 +52,17 @@ function createWindow () {
   console.log('mainWindow opened')
 }
 
+// Start app
 app.on('ready', createWindow)
 
+// App is close
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
   }
 })
 
+// Active app
 app.on('activate', () => {
   if (mainWindow === null) {
     createWindow()

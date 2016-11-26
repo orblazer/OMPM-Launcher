@@ -11,6 +11,11 @@ import LauncherLog from '../lib/log/LauncherLog'
 
 const configFile = path.join('app', 'config', 'config.json')
 
+/**
+ * Save the config
+ * @param {Object} config The config
+ * @return {Promise} The promise of save config
+ */
 function saveConfig (config) {
   return new Promise((resolve, reject) => {
     fs.writeFile(configFile, JSON.stringify(config), (err) => {
@@ -24,6 +29,11 @@ function saveConfig (config) {
     })
   })
 }
+/**
+ * Read the config
+ * @param {Object} store The store
+ * @return {Promise} The promise of read config
+ */
 function readConfig (store) {
   return new Promise((resolve, reject) => {
     fs.open(configFile, 'r', (err, fd) => {
@@ -59,6 +69,12 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    /**
+     * Set the settings
+     * @param {Object} state The state
+     * @param {Object} config The settings
+     * @constructor
+     */
     INITIALIZE (state, config) {
       LauncherLog.log('Settings is loaded')
       state = config
@@ -68,6 +84,11 @@ export default new Vuex.Store({
     settings: state => state
   },
   actions: {
+    /**
+     * Initialize the config
+     * @param {Object} store Tee store
+     * @return {Promise} The promise of initializing
+     */
     initialize (store) {
       LauncherLog.debug('Loading settings...')
       return new Promise((resolve, reject) => {
@@ -77,6 +98,12 @@ export default new Vuex.Store({
       })
     },
 
+    /**
+     * Save the config
+     * @param {Object} store The store
+     * @param {Object} config The config
+     * @return {Promise} The promise of save config
+     */
     saveConfig (store, config) {
       return saveConfig(config)
     }

@@ -37,6 +37,9 @@ export default {
     }
   },
   methods: {
+    /**
+     * Update the launcher log
+     */
     updateLauncherLog () {
       const logs = fs.readFileSync(LauncherLog.logFile, 'utf8').split('\n')
       logs.forEach((log, key) => {

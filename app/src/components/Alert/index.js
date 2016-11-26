@@ -26,6 +26,10 @@ export default {
     }
   },
   computed: {
+    /**
+     * Print the alerts
+     * @return {Array} The array of alerts
+     */
     alerts () {
       if (this.maxStack === -1) {
         return Object.values(this.$store.getters.alerts).filter((alert) => (this.alertType === 'all') || (this.alertType === alert.type))
