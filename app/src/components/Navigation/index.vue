@@ -6,8 +6,7 @@
     <router-link to="/instances"><i class="fa fa-server"></i> {{$t('components.navigation.instances')}}</router-link>
     <router-link to="/manage" v-if="canManage">
       <i class="fa fa-database"></i>
-      <template v-if="canAdmin">{{$t('components.navigation.manage')}}</template>
-      <template v-else>{{$t('components.navigation.editor')}}</template>
+      {{$tc('components.navigation.manage', canAdmin?1:2)}}
     </router-link>
     <router-link to="/console">
       <i class="fa fa-terminal"></i> {{$t('components.navigation.console')}}</router-link>

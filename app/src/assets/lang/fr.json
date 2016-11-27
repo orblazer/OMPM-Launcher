@@ -5,8 +5,7 @@
     "navigation": {
       "modPacks": "Pack de mods",
       "instances": "Instances",
-      "manage": "Gestion",
-      "editor": "Editeur",
+      "manage": "Gestion | Editeur",
       "console": "Console",
       "settings": "Paramètres",
       "logout": "Déconnexion"
@@ -51,9 +50,14 @@
   "pages": {
     "initialize": {
       "loading": "Chargement...",
+      "settings": {
+        "loading": "Chargement des paramètres...",
+        "done": "Les paramètres ont été chargé.",
+        "fail": "Les paramètres n'ont pas pus être chargé."
+      },
       "checkServer": {
         "loading": "Connexion au serveur...",
-        "fail": "Impossible de ce connecté au serveur."
+        "fail": "Impossible de se connecter au serveur."
       },
       "checkUpdate": {
         "loading": "Recherche de mises à jour...",
@@ -63,8 +67,8 @@
         "loading": "Téléchargement des mises à jour..."
       },
       "versions": {
-        "loading": "Chargement des versions disponnible...",
-        "done": "Les versions disponnible ont été chargé.",
+        "loading": "Chargement des versions disponible...",
+        "done": "Les versions disponible ont été chargé.",
         "fail": "Les versions n'ont pas pus être chargé."
       },
       "modPacks": {
@@ -76,11 +80,6 @@
         "loading": "Chargement des instances...",
         "done": "Les instances ont été chargé.",
         "fail": "Les instances n'ont pas pus être chargé."
-      },
-      "settings": {
-        "loading": "Chargement des paramètres...",
-        "done": "Les paramètres ont été chargé.",
-        "fail": "Les paramètres n'ont pas pus être chargé."
       }
     },
     "modPacks": {
@@ -93,20 +92,29 @@
       "autoScroll": "Défilement automatique ?"
     },
     "settings": {
+      "dialog": {
+        "gameLocation": "Choisissez l'emplacement du jeu",
+        "javaHome": "Choisissez le dossier de java"
+      },
       "save": {
         "done": "Les paramètres ont bien été sauvegardé.",
         "fail": "Les paramètres n'ont pas pus êtres sauvegardé."
       },
       "tabs": {
-        "global": "Général",
+        "general": "Général",
         "java": "Java"
       },
       "gameLocation": "Emplacement des dossier",
       "launcherVisibility": {
         "label": "Visibilité du launcher",
-        "always": "Gardez le launcher ouvert",
+        "always": "Garder le launcher ouvert",
         "hidden": "Cacher le launcher au lancement du jeu",
         "close": "Fermer le launcher au lancement du jeu"
+      },
+      "lang": {
+        "label": "Langue du launcher",
+        "en": "Anglais",
+        "fr": "Français"
       },
       "javaLocation": "Emplacement de java",
       "allocatedRam": "RAM alloué",

@@ -8,7 +8,6 @@ import Vuex from 'vuex'
 import path from 'path'
 import fs from 'fs'
 import LauncherLog from '../lib/log/LauncherLog'
-
 const configFile = path.join('app', 'config', 'config.json')
 
 /**
@@ -61,10 +60,11 @@ export default new Vuex.Store({
   state: {
     general: {
       installPath: process.cwd(),
-      launcherVisibility: 'always'
+      launcherVisibility: 'always',
+      lang: Vue.config.lang
     },
     java: {
-      installPath: path.normalize(path.join(process.env.JAVA_HOME, './bin/java.exe')),
+      installPath: process.env.JAVA_HOME,
       allocatedRam: 1024
     }
   },
@@ -77,7 +77,9 @@ export default new Vuex.Store({
      */
     INITIALIZE (state, config) {
       LauncherLog.log('Settings is loaded')
-      state = config
+
+      Vue.set(state, 'general', config.general)
+      Vue.set(state, 'java', config.java)
     }
   },
   getters: {

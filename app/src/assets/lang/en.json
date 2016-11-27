@@ -10,6 +10,116 @@
       "console": "Console",
       "settings": "Settings",
       "logout": "Logout"
+    },
+    "modPack": {
+      "info": {
+        "title": "Informations",
+        "name": "Name",
+        "authors": "Author | Authors",
+        "version": "Version",
+        "mcVersion": "Minecraft version",
+        "forgeVersion": "Forge version"
+      },
+      "action": {
+        "makeInstance": "Create an instance",
+        "downloadServer": "Download the server"
+      },
+      "mods": {
+        "tabs": {
+          "core": "Essential mod | Essential Mods",
+          "mods": "Required mod | Required mods",
+          "optional": "Optional mod | Optional mods"
+        },
+        "name": "Name",
+        "version": "Version",
+        "authors": "Author(s)",
+        "noCore": "No mods are essential",
+        "noMods": "No mods required",
+        "noOptional": "No mods are optional"
+      },
+      "makeInstance": {
+        "title": "Creating an instance",
+        "name": "Instance name",
+        "version": "Instance version",
+        "submit": "Create the instance"
+      }
+    }
+  },
+  "auth": {
+    "logout": "You are now logged out."
+  },
+  "pages": {
+    "initialize": {
+      "loading": "Loading...",
+      "settings": {
+        "loading": "Loading settings...",
+        "done": "The parameters have been loaded.",
+        "fail": "The parameters can not be loaded."
+      },
+      "checkServer": {
+        "loading": "Connecting to the server...",
+        "fail": "Unable to connect to server."
+      },
+      "checkUpdate": {
+        "loading": "Search for updates...",
+        "upToDate": "The launcher is up to date."
+      },
+      "downloadUpdate": {
+        "loading": "Downloading updates..."
+      },
+      "versions": {
+        "loading": "Loading available versions...",
+        "done": "Available versions were loaded.",
+        "fail": "The versions could not be loaded."
+      },
+      "modPacks": {
+        "loading": "Loading mods packs...",
+        "done": "Mods packs have been loaded.",
+        "fail": "Mods packs could not be loaded."
+      },
+      "instances": {
+        "loading": "Loading instances...",
+        "done": "The instances were loaded.",
+        "fail": "The instances could not be loaded."
+      }
+    },
+    "modPacks": {
+      "by": "By",
+      "created": "Created at",
+      "updated": "Last update on"
+    },
+    "console": {
+      "send": "Send the logs.",
+      "autoScroll": "Automatic scrolling ?"
+    },
+    "settings": {
+      "dialog": {
+        "gameLocation": "Choose the location of the game",
+        "javaHome": "Choose the java folder"
+      },
+      "save": {
+        "done": "The settings have been saved.",
+        "fail": "The parameters could not be saved."
+      },
+      "tabs": {
+        "general": "General",
+        "java": "Java"
+      },
+      "gameLocation": "Location of the game",
+      "launcherVisibility": {
+        "label": "Visibility of the launcher",
+        "always": "Keep the launcher open",
+        "hidden": "Hide launcher at game launch",
+        "close": "Close launcher at game launch"
+      },
+      "lang": {
+        "label": "Language of the launcher",
+        "en": "English",
+        "fr": "French"
+      },
+      "javaLocation": "Location of java",
+      "allocatedRam": "Allocated RAM",
+      "submit": "Save"
     }
   }
 }

@@ -26,13 +26,17 @@ export default (Vue) => {
     fs.readdir(langPath, (err, files) => {
       if (err) throw err
 
-      files.forEach((file, index) => {
-        Vue.locale(file.replace('.json', ''), JSON.parse(fs.readFileSync(path.join(langPath, file), 'UTF-8')))
+      function loadLang () {
+        files.forEach((file, index) => {
+          Vue.locale(file.replace('.json', ''), JSON.parse(fs.readFileSync(path.join(langPath, file), 'UTF-8')))
 
-        if (index >= (files.length - 1)) {
-          resolve()
-        }
-      })
+          if (index >= (files.length - 1)) {
+            resolve()
+          }
+        })
+      }
+
+      loadLang()
     })
   })
 }

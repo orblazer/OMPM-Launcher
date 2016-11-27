@@ -1,12 +1,11 @@
 <template>
   <form class="settings" @submit.prevent="saveSettings">
     <Tabs>
-      <Tab :header="$t('pages.settings.tabs.global')" active>
+      <Tab :header="$t('pages.settings.tabs.general')" active>
         <div class="input-control folderSelection">
           <label for="gameLocation">{{$t('pages.settings.gameLocation')}}</label>
-          <input type="file" class="folderInput" id="gameLocation" ref="gameLocation" nwdirectory
-            @change="gameLocChange">
-          <label for="gameLocation" class="folderSelectInput">{{general.installPath}}</label>
+          <input type="text" v-model="general.installPath" id="gameLocation" class="folderSelectInput"
+            @click.prevent="selectGameLocation">
         </div>
 
         <div class="input-control">
@@ -17,13 +16,20 @@
             <option value="close">{{$t('pages.settings.launcherVisibility.close')}}</option>
           </select>
         </div>
+
+        <div class="input-control">
+          <label for="lang">{{$t('pages.settings.lang.label')}}</label>
+          <select id="lang" v-model="general.lang" @change="changeLang">
+            <option v-for="lang in availableLang" :value="lang">{{$t('pages.settings.lang.'+lang)}}</option>
+          </select>
+        </div>
       </Tab>
 
       <Tab :header="$t('pages.settings.tabs.java')">
         <div class="input-control folderSelection">
           <label for="javaLocation">{{$t('pages.settings.javaLocation')}}</label>
-          <input type="file" accept="java.*" class="folderInput" id="javaLocation" ref="javaLocation" @change="javaLocChange" :value="java.installPath">
-          <label for="javaLocation" class="folderSelectInput">{{java.installPath}}</label>
+          <input type="text" v-model="java.installPath" id="javaLocation" class="folderSelectInput"
+            @click.prevent="selectJavaHome">
         </div>
 
         <div class="input-control">

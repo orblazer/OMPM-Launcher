@@ -1,5 +1,6 @@
 app/dist/index.html
 app/dist/build.js
+app/config/*
 builds/*
 node_modules
 npm-debug.log

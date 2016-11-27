@@ -27,7 +27,7 @@ export default {
   },
   mounted () {
     setTimeout(() => {
-      this.checkServer()
+      this.getSettings()
     }, 1000)
   },
   methods: {
@@ -54,6 +54,32 @@ export default {
         this.$parent.$router.push(redirect)
       }
       remote.getCurrentWindow().setProgressBar(0)
+    },
+
+    /**
+     * Get the settings
+     */
+    getSettings () {
+      this.status = Vue.t('pages.initialize.settings.loading')
+      SettingsStore.dispatch('initialize').then((settings) => {
+        Vue.config.lang = settings.general.lang
+
+        this.status = Vue.t('pages.initialize.settings.done')
+        this.increaseProgress()
+
+        setTimeout(() => {
+          this.checkServer()
+        }, 100)
+      }).catch((err) => {
+        this.status = Vue.t('pages.initialize.settings.fail')
+        this.increaseProgress()
+
+        setTimeout(() => {
+          this.checkServer()
+        }, 100)
+
+        console.error(err)
+      })
     },
 
     /**
@@ -166,34 +192,11 @@ export default {
         this.increaseProgress()
 
         setTimeout(() => {
-          this.getSettings()
+          this.doneLoading()
         }, 100)
       }).catch((err) => {
         this.status = Vue.t('pages.initialize.instances.fail')
-        this.increaseProgress()
-
-        console.error(err)
-      })
-    },
-
-    /**
-     * Get the settings
-     */
-    getSettings () {
-      this.status = Vue.t('pages.initialize.settings.loading')
-      SettingsStore.dispatch('initialize').then(() => {
-        this.status = Vue.t('pages.initialize.settings.done')
-        this.increaseProgress()
-
-        setTimeout(() => {
-          this.doneLoading()
-        }, 100)
-      }).catch((err) => {
-        this.increaseProgress()
-
-        setTimeout(() => {
-          this.doneLoading()
-        }, 100)
+        this.doneLoading()
 
         console.error(err)
       })

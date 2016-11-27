@@ -6,6 +6,7 @@
  */
 import os from 'os'
 import Vuex from 'vuex'
+import { remote } from 'electron'
 import Settings from '../../store/SettingsStore'
 import Alert from '../../store/AlertStore'
 
@@ -20,9 +21,11 @@ export default {
     return {
       maxRam: Math.floor(os.totalmem() / 1024000000),
       possibleRam: [],
+      availableLang: Object.keys(this.$parent.$lang.locales),
       general: {
         installPath: '',
-        launcherVisibility: ''
+        launcherVisibility: '',
+        lang: ''
       },
       java: {
         installPath: '',
@@ -31,8 +34,8 @@ export default {
     }
   },
   created () {
-    this.general = this.$store.getters.settings.general
-    this.java = this.$store.getters.settings.java
+    this.general = Object.assign({}, this.$store.getters.settings.general)
+    this.java = Object.assign({}, this.$store.getters.settings.java)
 
     for (let i = 1; i <= this.maxRam; i++) {
       this.possibleRam.push(i)
@@ -42,24 +45,54 @@ export default {
     ...Vuex.mapActions(['saveConfig']),
 
     /**
-     * The game location is change
+     * Select the game location
      */
-    gameLocChange () {
-      this.general.installPath = this.$refs['gameLocation'].value
+    selectGameLocation () {
+      remote.dialog.showOpenDialog({
+        title: Vue.t('pages.settings.dialog.gameLocation'),
+        properties: ['openDirectory'],
+        defaultPath: this.general.installPath
+      }, (folderPaths) => {
+        if (folderPaths !== undefined) {
+          this.$nextTick(() => {
+            this.general.installPath = folderPaths[0]
+          })
+        }
+      })
     },
 
     /**
-     * The java location is change
+     * Change the lang
      */
-    javaLocChange () {
-      this.java.installPath = this.$refs['javaLocation'].value
+    changeLang () {
+      Vue.config.lang = this.general.lang
+    },
+
+    /**
+     * Select the java home
+     */
+    selectJavaHome () {
+      remote.dialog.showOpenDialog({
+        title: Vue.t('pages.settings.dialog.javaHome'),
+        properties: ['openDirectory'],
+        defaultPath: this.java.installPath
+      }, (folderPaths) => {
+        if (folderPaths !== undefined) {
+          this.$nextTick(() => {
+            this.java.installPath = folderPaths[0]
+          })
+        }
+      })
     },
 
     /**
      * Save the settings
      */
     saveSettings () {
-      this.saveConfig(this._data).then(() => {
+      this.saveConfig({
+        general: this.general,
+        java: this.java
+      }).then(() => {
         Alert.dispatch('alert', {
           message: Vue.t('pages.settings.save.done')
         })

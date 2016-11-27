@@ -13,7 +13,7 @@ form {
       width        : 35%;
 
       & > i {
-        color: gray;
+        color : gray;
       }
     }
 
@@ -67,11 +67,6 @@ form {
     }
 
     &.folderSelection {
-      & > .folderInput {
-        display    : none;
-        visibility : hidden;
-      }
-
       & > .folderSelectInput {
         width            : 45%;
         height           : 25px;
@@ -79,6 +74,7 @@ form {
         margin-left      : 2.5%;
         background-color : $background;
         color            : white;
+        cursor           : pointer;
         text-align       : center;
         outline          : 1px solid $login-input;
         transition       : outline .15s;
