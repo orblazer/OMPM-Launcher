@@ -60,7 +60,7 @@ div.mce-tinymce-inline { width : 100% }
 
 .mce-monospace { font-family : "Courier New", Courier, monospace }
 
-.mce-toolbar-grp { padding : 2px 0 5px }
+.mce-toolbar-grp { padding : 2px 2px 5px }
 
 .mce-toolbar-grp .mce-flow-layout-item { margin-bottom : 0 }
 
@@ -166,7 +166,7 @@ div.mce-tinymce-inline { width : 100% }
 
 .mce-scroll { position : relative }
 
-.mce-panel { border : 0 solid #cacaca; border : 0 solid rgba(0, 0, 0, 0.2); background-color : #0c1119 }
+.mce-panel { background-color : #0c1119 }
 
 .mce-floatpanel { position : absolute }
 

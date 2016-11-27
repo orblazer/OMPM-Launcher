@@ -69,3 +69,11 @@ td[data-mce-selected], th[data-mce-selected] { background-color : #3399ff !impor
 a { color : white; text-decoration : none; cursor : pointer; }
 
 a:hover, a:focus { text-decoration : underline; }
+
+::-webkit-scrollbar { width : 10px; height : 10px; pointer-events : none; cursor : n-resize; }
+
+::-webkit-scrollbar-thumb { border-left : 1px solid #292e37; background-color : #7ab300; }
+
+::-webkit-scrollbar-thumb:hover { background-color : #9ce400; }
+
+::-webkit-scrollbar-track, ::-webkit-scrollbar-corner { background-color : #292e37; }
