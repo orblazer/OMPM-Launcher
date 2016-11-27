@@ -1,5 +1,5 @@
 {
-  "__NAME__": "English",
+  "__NAME__": "English (United States)",
   "unknown": "Unknown",
   "components": {
     "navigation": {
@@ -43,6 +43,64 @@
         "version": "Instance version",
         "submit": "Create the instance"
       }
+    },
+    "mpEditor": {
+      "steps": [
+        {
+          "step_name": "General information",
+          "FileLocation": "Archive of the mods packs (.zip)",
+          "name": "Mods pack name",
+          "smallDesc": "Short description of<br>the mods pack",
+          "version": "Mods pack version",
+          "authors": "Mods pack author(s)",
+          "authors_label": "@:components.mpEditor.mpAuthors<br><i>(Separate the names with a comma)</i>",
+          "mcVersion": "Version of Minecraft",
+          "forgeVersion": "Version of forge",
+          "fVer_recommended": "recommended",
+          "type": "Mods pack type",
+          "types": [
+            "Public",
+            "Private"
+          ]
+        },
+        {
+          "step_name": "Additional information",
+          "logo": "Logo of the mods pack (64x64)",
+          "description": "Full description of the mods pack",
+          "changelog": "Changelog of the version"
+        },
+        {
+          "step_name": "Mods checking",
+          "title": "General mods information",
+          "mods": {
+            "name": "@:components.modPack.mods.name",
+            "version": "@:components.modPack.mods.version",
+            "authors": "@:components.modPack.mods.authors",
+            "description": "Description",
+            "mcVersion": "Version of Minecraft",
+            "type": "Type",
+            "side": "Side",
+            "types": [
+              "Essential mod",
+              "Required mod",
+              "Optional mod"
+            ],
+            "sides": [
+              "Both sides",
+              "Server only",
+              "Client only"
+            ]
+          },
+          "properties": "Properties of mods",
+          "loading": "Loading mods..."
+        },
+        {
+          "step_name": "Submission",
+          "loading": "Sends the mods pack..."
+        }
+      ],
+      "next": "NEXT",
+      "previous": "PREVIOU"
     }
   },
   "auth": {
@@ -92,6 +150,21 @@
       "send": "Send the logs.",
       "autoScroll": "Automatic scrolling ?"
     },
+    "manage": {
+      "tabs": {
+        "editor": "Mods Pack Editor",
+        "admin": "Administration",
+        "myModPacks": "My mods packs",
+        "request": "My requests",
+        "create": "Create a mods pack"
+      },
+      "modPacks": {
+        "name": "Name",
+        "version": "Number of versions",
+        "download": "Download",
+        "action": "Actions"
+      }
+    },
     "settings": {
       "dialog": {
         "gameLocation": "Choose the location of the game",
@@ -114,8 +187,8 @@
       },
       "lang": {
         "label": "Language of the launcher",
-        "en": "English",
-        "fr": "French"
+        "en_US": "English (United States)",
+        "fr_FR": "French (France)"
       },
       "javaLocation": "Location of java",
       "allocatedRam": "Allocated RAM",

@@ -21,8 +21,8 @@ export default {
     }
   },
   components: {
-    Tabs: require('../tabs/index.vue'),
-    Tab: require('../tabs/tab').default
+    Tabs: require('../Tabs/index.vue'),
+    Tab: require('../Tabs/tab').default
   },
   created () {
     this.eventListener = (event) => {

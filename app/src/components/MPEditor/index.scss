@@ -1,0 +1,161 @@
+@import "../../assets/style/colors";
+
+.editor {
+  & > .steps-control {
+    display    : table;
+    list-style : none;
+    padding    : 0;
+    margin     : 10px 0 21px 0;
+
+    & > li {
+      display    : table-cell;
+      text-align : center;
+      width      : 1%;
+
+      &:first-child:before {
+        max-width : 51%;
+        left      : 50%;
+      }
+      &:last-child:before {
+        max-width : 50%;
+        width     : 50%;
+      }
+
+      &.active {
+        &:before {
+          border-top-color : $green;
+        }
+
+        & > .step {
+          border-color : $green;
+          color        : $btn-hover-bg;
+          font-weight  : bold;
+        }
+      }
+
+      &:before {
+        display    : block;
+        content    : '';
+        width      : 100%;
+        height     : 1px;
+        overflow   : hidden;
+        border-top : 4px solid gray;
+        position   : relative;
+        top        : 21px;
+        z-index    : 1;
+      }
+
+      & > .step {
+        border           : 5px solid gray;
+        font-size        : 15px;
+        border-radius    : 100%;
+        background-color : $background;
+        position         : relative;
+        z-index          : 2;
+        display          : inline-block;
+        width            : 40px;
+        height           : 40px;
+        line-height      : 30px;
+        text-align       : center;
+      }
+
+      & > .title {
+        display      : block;
+        margin-top   : 4px;
+        max-width    : 100%;
+        font-size    : 14px;
+        z-index      : 104;
+        text-align   : center;
+        table-layout : fixed;
+        word-wrap    : break-word;
+      }
+    }
+  }
+
+  & > .steps-content {
+    list-style : none;
+    padding    : 0;
+    margin     : 40px 0 0;
+
+    .title {
+      margin : .83em 0 10px;
+    }
+
+    & > .step-2 {
+      & > label {
+        display       : block;
+        text-align    : center;
+        font-size     : 18px;
+        margin-bottom : 10px;
+      }
+    }
+
+    & > .step-3 {
+      height : 416px;
+
+      & > .loadingMods > .bar {
+        transition : none;
+      }
+      & > .mods {
+        border-collapse : collapse;
+        width           : 100%;
+        overflow        : auto;
+
+        & > thead {
+          background-color : $table-head;
+        }
+
+        & > tbody > tr > td {
+          border-collapse : collapse;
+
+          & > input, & > select {
+            width               : 100%;
+            border              : none;
+            padding             : 5px;
+            background-color    : $background;
+            color               : white;
+            text-align          : center;
+            outline             : 1px solid $login-input;
+            transition          : outline .15s;
+            outline-offset      : 0;
+            -webkit-user-select : initial; -moz-user-select : initial; -ms-user-select : initial; user-select : initial;
+            cursor              : text;
+
+            &:focus, &:hover {
+              outline-color : $login-hover;
+            }
+
+            &:disabled {
+              cursor : not-allowed !important;
+            }
+          }
+          & > select {
+            padding : 4px 5px;
+            cursor  : pointer;
+          }
+        }
+      }
+      & > .submit-control {
+        width : 100%;
+      }
+    }
+  }
+}
+
+/**
+ * Customise TinyMCE
+ */
+.mce-textbox {
+  background-color : $background !important;
+  color            : white !important;
+  outline          : 1px solid $login-input !important;
+  border           : none !important;
+  outline-offset   : -1px;
+  cursor           : pointer;
+
+  &:focus, &:hover {
+    outline-color  : $login_hover !important;
+    border-color   : transparent;
+    outline-offset : -1px;
+  }
+}

@@ -35,7 +35,7 @@ let config = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules|tinymce\/plugins/
       },
       {
         test: /\.json$/,
@@ -108,7 +108,7 @@ if (process.env.NODE_ENV !== 'production') {
       {
         test: /\.js$/,
         loader: 'eslint-loader',
-        exclude: /node_modules/
+        exclude: /node_modules|tinymce\/plugins/
       },
       {
         test: /\.vue$/,

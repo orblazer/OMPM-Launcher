@@ -14,8 +14,8 @@ export default {
   name: 'Settings',
   store: Settings,
   components: {
-    Tabs: require('../../components/tabs/index.vue'),
-    Tab: require('../../components/tabs/tab').default
+    Tabs: require('../../components/Tabs/index.vue'),
+    Tab: require('../../components/Tabs/tab').default
   },
   data () {
     return {

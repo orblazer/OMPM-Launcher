@@ -16,10 +16,21 @@ export default (Vue) => {
   // set lang
   Vue.config.lang = remote.app.getLocale()
   if (Vue.config.lang.indexOf('-') > 1) {
-    Vue.config.lang = Vue.config.lang.substring(0, Vue.config.lang.indexOf('-'))
+    const lang = Vue.config.lang.split('-')
+    Vue.config.lang = lang[0] + '_' + lang[1].toUpperCase()
+  } else {
+    switch (Vue.config.lang.toLowerCase()) {
+      case 'fr':
+        Vue.config.lang = 'fr_FR'
+        break
+
+      default:
+        Vue.config.lang = 'en_US'
+        break
+    }
   }
 
-  Vue.config.fallbackLang = 'en'
+  Vue.config.fallbackLang = 'en_US'
 
   // Load lang
   return new Promise((resolve) => {

@@ -33,6 +33,8 @@ form {
       outline-offset      : 0;
       -webkit-user-select : initial; -moz-user-select : initial; -ms-user-select : initial; user-select : initial;
       cursor              : text;
+      font-family         : "Open Sans";
+      font-size           : 15px;
 
       &:focus:not(.success):not(.error), &:hover:not(.success):not(.error) {
         outline-color : $login-hover;
@@ -54,11 +56,10 @@ form {
     }
 
     & > textarea {
-      height      : auto;
-      min-height  : 25px;
-      resize      : vertical;
-      text-align  : left;
-      font-family : "Open Sans";
+      height     : auto;
+      min-height : 25px;
+      resize     : vertical;
+      text-align : left;
     }
 
     & > select {
@@ -78,7 +79,6 @@ form {
         text-align       : center;
         outline          : 1px solid $login-input;
         transition       : outline .15s;
-        font-size        : 13px;
         margin-right     : 0;
         overflow         : hidden;
 
@@ -118,7 +118,6 @@ form {
 
     & > input:not(.btn) {
       border     : none;
-      font-size  : 1em;
       background : none;
       color      : white;
       cursor     : pointer;

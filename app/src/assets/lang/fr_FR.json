@@ -1,5 +1,5 @@
 {
-  "__NAME__": "Français",
+  "__NAME__": "Français (France)",
   "unknown": "Inconnu",
   "components": {
     "navigation": {
@@ -42,6 +42,67 @@
         "version": "Version de l'instance",
         "submit": "Créer l'instance"
       }
+    },
+    "mpEditor": {
+      "selectMpLocation": "Choissisez l'archive du pack de mods",
+      "mpLocationIncorrect": "L'archive sélectionné ne contient aucun mods or aucune configuration",
+      "_authors": "Auteur(s) du pack de mods",
+      "steps": [
+        {
+          "step_name": "Informations général",
+          "zipLocation": "Archive du packs de mods (.zip)",
+          "name": "Nom de pack de mods",
+          "smallDesc": "Courte description du<br>pack de mods",
+          "version": "Version du pack de mods",
+          "authors": "@:components.mpEditor._authors",
+          "authors_label": "@:components.mpEditor._authors<br><i>(Séparer les nom par une virgule)</i>",
+          "mcVersion": "Version de Minecraft",
+          "forgeVersion": "Version de forge",
+          "fVer_recommended": "recommandé",
+          "type": "Type du pack de mods",
+          "types": [
+            "Public",
+            "Privé"
+          ]
+        },
+        {
+          "step_name": "Informations supplémentaire",
+          "logo": "Logo du packs de mods (64x64)",
+          "description": "Description complète du pack de mods",
+          "changelog": "Changelog de la version"
+        },
+        {
+          "step_name": "Vérification des mods",
+          "title": "Informations général des mods",
+          "mods": {
+            "name": "@:components.modPack.mods.name",
+            "version": "@:components.modPack.mods.version",
+            "authors": "@:components.modPack.mods.authors",
+            "description": "Description",
+            "mcVersion": "Version de Minecraft",
+            "type": "Type",
+            "side": "Côté",
+            "types": [
+              "Mod essentiel",
+              "Mod requis",
+              "Mod optionel"
+            ],
+            "sides": [
+              "Des 2 côté",
+              "Serveur uniquement",
+              "Client uniquement"
+            ]
+          },
+          "properties": "Propriétés des mods",
+          "loading": "Chargement des mods..."
+        },
+        {
+          "step_name": "Soumission",
+          "loading": "Envoie du pack de mods..."
+        }
+      ],
+      "next": "SUIVANT",
+      "previous": "PRÉCÉDENT"
     }
   },
   "auth": {
@@ -87,6 +148,21 @@
       "created": "Créer le",
       "updated": "Dernière MAJ le"
     },
+    "manage": {
+      "tabs": {
+        "editor": "Éditeur de pack de mods",
+        "admin": "Administration",
+        "myModPacks": "Mes packs de mods",
+        "request": "Mes demandes",
+        "create": "Créer un pack de mods"
+      },
+      "modPacks": {
+        "name": "Nom",
+        "version": "Nombre de versions",
+        "download": "Téléchargements",
+        "action": "Actions"
+      }
+    },
     "console": {
       "send": "Envoyer les logs.",
       "autoScroll": "Défilement automatique ?"
@@ -113,8 +189,8 @@
       },
       "lang": {
         "label": "Langue du launcher",
-        "en": "Anglais",
-        "fr": "Français"
+        "en_US": "Anglais (État Unis)",
+        "fr_FR": "Français (France)"
       },
       "javaLocation": "Emplacement de java",
       "allocatedRam": "RAM alloué",

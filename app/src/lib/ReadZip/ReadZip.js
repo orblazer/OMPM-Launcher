@@ -4,9 +4,9 @@
  * @author orblazer <orblazer@relonar.fr>
  * @created 26/10/2016
  */
-const path = nw.require('path')
-const AdmZip = nw.require('adm-zip')
-const crypto = nw.require('crypto')
+import path from 'path'
+import AdmZip from 'adm-zip'
+import crypto from 'crypto'
 
 const _zipFile = Symbol('zipFile')
 class ReadZip {

@@ -24,6 +24,7 @@ module.exports = {
     Vue: true,
     App: true,
     sioClient: true,
-    SocketIOFileUpload: true
+    SocketIOFileUpload: true,
+    tinyMCE: true
   },
 }

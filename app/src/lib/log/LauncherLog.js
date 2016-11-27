@@ -102,7 +102,7 @@ class LauncherLog {
       throw new SyntaxError('You must pass a data')
     }
 
-    console.log(this._date + ' [' + level.toUpperCase() + '] ' + this._formatData(data) + '\n')
+    // console.log(this._date + ' [' + level.toUpperCase() + '] ' + this._formatData(data) + '\n')
     fs.appendFileSync(this.logFile, this._date + ' [' + level.toUpperCase() + '] ' + this._formatData(data) + '\n')
   }
 

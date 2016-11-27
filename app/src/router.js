@@ -8,6 +8,7 @@ import VueRouter from 'vue-router'
 import AuthStore from './store/AuthStore'
 import Initialize from './pages/initialize/index.vue'
 import ModPacks from './pages/modPacks/index.vue'
+import Manage from './pages/manage/index.vue'
 import Console from './pages/console/index.vue'
 import Settings from './pages/settings/index.vue'
 
@@ -36,8 +37,8 @@ export default (Vue) => {
     // meta: { requiresAuth: true }
   }, {
     name: 'manage',
-    path: '/manage'/*,
-     component: require('./components/manage/index').default*/
+    path: '/manage',
+    component: Manage
     // meta: { requiresAuth: true }
   }, {
     name: 'console',

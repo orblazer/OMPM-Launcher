@@ -11,7 +11,7 @@ import VersionsStore from '../../store/VersionsStore'
 import ModPacksStore from '../../store/ModPacksStore'
 import InstancesStore from '../../store/InstancesStore'
 import SettingsStore from '../../store/SettingsStore'
-import ProgressBar from '../../components/progressBar/index.vue'
+import ProgressBar from '../../components/ProgressBar/index.vue'
 
 export default {
   name: 'Initialize',

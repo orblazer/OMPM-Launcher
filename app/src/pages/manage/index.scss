@@ -1,0 +1,14 @@
+@import "../../assets/style/colors";
+
+.manage {
+  & > .tabs-content {
+    padding : 5px 15px !important;
+
+    #modPacks {
+      width : 100%;
+      & > thead {
+        background-color : $table-head;
+      }
+    }
+  }
+}

@@ -4,6 +4,7 @@
   "description": "The launcher for custom Minecraft ModPacks",
   "main": "electron.js",
   "dependencies": {
+    "adm-zip": "^0.4.7",
     "bufferutil": "^1.2.1",
     "electron": "^1.4.8",
     "jquery": "^3.1.1",
