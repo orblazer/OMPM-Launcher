@@ -12,10 +12,11 @@ const configFile = path.join('app', 'config', 'config.json')
 
 /**
  * Save the config
+ * @param {Object} store The store
  * @param {Object} config The config
  * @return {Promise} The promise of save config
  */
-function saveConfig (config) {
+function saveConfig (store, config) {
   return new Promise((resolve, reject) => {
     fs.writeFile(configFile, JSON.stringify(config), (err) => {
       if (err) {
@@ -23,6 +24,8 @@ function saveConfig (config) {
         reject()
       } else {
         LauncherLog.log('Settings is saved')
+
+        store.commit('UPDATE', config)
         resolve(config)
       }
     })
@@ -38,10 +41,10 @@ function readConfig (store) {
     fs.open(configFile, 'r', (err, fd) => {
       if (err) {
         if (err.code === 'ENOENT') {
-          reject()
+          reject(err)
           return
         } else {
-          reject()
+          reject(err)
           LauncherLog.error(err)
           throw err
         }
@@ -80,6 +83,19 @@ export default new Vuex.Store({
 
       Vue.set(state, 'general', config.general)
       Vue.set(state, 'java', config.java)
+    },
+
+    /**
+     * Update the settings
+     * @param {Object} state The state
+     * @param {Object} config The settings
+     * @constructor
+     */
+    UPDATE (state, config) {
+      LauncherLog.log('Settings is updated')
+
+      Vue.set(state, 'general', config.general)
+      Vue.set(state, 'java', config.java)
     }
   },
   getters: {
@@ -95,6 +111,7 @@ export default new Vuex.Store({
       LauncherLog.debug('Loading settings...')
       return new Promise((resolve, reject) => {
         readConfig(store).then(resolve).catch(() => {
+          LauncherLog.log('Save the default settings.')
           saveConfig(store.getters.settings).then(resolve).catch(reject)
         })
       })
@@ -107,7 +124,7 @@ export default new Vuex.Store({
      * @return {Promise} The promise of save config
      */
     saveConfig (store, config) {
-      return saveConfig(config)
+      return saveConfig(store, config)
     }
   }
 })

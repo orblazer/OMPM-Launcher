@@ -90,6 +90,7 @@ i18n(Vue).then(() => {
         platform += ' ' + os.release().slice(0, os.release().indexOf('.'))
 
         LauncherLog.log('==========================================')
+        LauncherLog.log('= Date : ' + new Date())
         LauncherLog.log('= Os : ' + platform + ' (' + os.arch() + ', v: ' + os.release() + ')')
         LauncherLog.log('= Processor : ' + os.cpus()[0].model + ' (arch : ' + process.env.PROCESSOR_ARCHITECTURE + ')')
         LauncherLog.log('= Max ram : ' + Math.floor(os.totalmem() / 1024000000) + ' Go')

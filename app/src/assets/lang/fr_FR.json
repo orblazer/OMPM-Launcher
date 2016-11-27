@@ -44,8 +44,11 @@
       }
     },
     "mpEditor": {
-      "selectMpLocation": "Choissisez l'archive du pack de mods",
-      "mpLocationIncorrect": "L'archive sélectionné ne contient aucun mods or aucune configuration",
+      "selectMpLocation": "Choisissez l'archive du pack de mods",
+      "mpLocationIncorrect": "L'archive sélectionné ne contient aucun mods ou aucune configuration.",
+      "selectMpLogo": "Choisissez le logo do pack de mods",
+      "mpLogo_cantRead": "L'image sélectionné ne peut pas être chargé.",
+      "mpLogo_errorSize": "L'image sélectionné ne fait pas du 64x64 pixels.",
       "_authors": "Auteur(s) du pack de mods",
       "steps": [
         {

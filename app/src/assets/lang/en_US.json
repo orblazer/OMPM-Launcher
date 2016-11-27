@@ -45,15 +45,21 @@
       }
     },
     "mpEditor": {
+      "selectMpLocation": "Choose the archive of the mods pack",
+      "mpLocationIncorrect": "The selected archive contains no mods or any configuration.",
+      "selectMpLogo": "Choose the mods pack logo",
+      "mpLogo_cantRead": "The selected image can not be loaded.",
+      "mpLogo_errorSize": "The selected image does not have 64x64 pixels.",
+      "_authors": "Mods pack author(s)",
       "steps": [
         {
           "step_name": "General information",
-          "FileLocation": "Archive of the mods packs (.zip)",
+          "zipLocation": "Archive of the mods packs (.zip)",
           "name": "Mods pack name",
           "smallDesc": "Short description of<br>the mods pack",
           "version": "Mods pack version",
-          "authors": "Mods pack author(s)",
-          "authors_label": "@:components.mpEditor.mpAuthors<br><i>(Separate the names with a comma)</i>",
+          "authors": "@:components.mpEditor._authors",
+          "authors_label": "@:components.mpEditor._authors<br><i>(Separate the names with a comma)</i>",
           "mcVersion": "Version of Minecraft",
           "forgeVersion": "Version of forge",
           "fVer_recommended": "recommended",
@@ -100,7 +106,7 @@
         }
       ],
       "next": "NEXT",
-      "previous": "PREVIOU"
+      "previous": "PREVIOUS"
     }
   },
   "auth": {

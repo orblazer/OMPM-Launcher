@@ -92,8 +92,8 @@
       <li class="step-2" v-show="step === 2">
         <div class="input-control folderSelection">
           <label for="mpLogo">{{$t('components.mpEditor.steps[1].logo')}}</label>
-          <input type="file" class="folderInput" id="mpLogo" ref="mpLogo" @change="logoChange" accept=".png" required>
-          <label for="mpLogo" class="folderSelectInput">{{mpLogo}}</label>
+          <input type="text" v-model="mpLogo" id="mpLogo" class="folderSelectInput"
+            @click.prevent="selectMpLogo">
         </div>
 
         <label class="title" for="mpDescription">{{$t('components.mpEditor.steps[1].description')}}</label>

@@ -69,11 +69,10 @@ export default {
     this.checkCanNextStep()
     const self = this
 
-    this._DSL('/assets/tinymce/tinymce.min.js').then(() => {
+    this._DSL_TinyMCE().then(() => {
       // Config for TinyMCE
       const tinyConfig = {
         selector: 'textarea#mpDescription',
-        language: Vue.config.lang,
         height: 260,
         resize: false,
         skin: 'ompm_launcher',
@@ -117,6 +116,11 @@ export default {
         }
       }
       tinyMCE.baseURL = window.location.origin + '/assets/tinymce'
+      if (Vue.config.lang !== 'en_US') {
+        tinyConfig.language = Vue.config.lang
+      } else {
+        tinyConfig.language = 'en'
+      }
 
       // Initialize TinyMCE for mod pack description
       tinyMCE.init(tinyConfig)
@@ -131,34 +135,38 @@ export default {
       tinyMCE.init(tinyConfig)
     })
   },
-  destroyed () {
-    const editor = tinyMCE.get('textarea#mpDescription')
+  beforeDestroy () {
+    const editor = tinyMCE.get('mpDescription')
     if (editor !== null) {
-      editor.destroy()
+      editor.remove()
     }
 
-    const editor2 = tinyMCE.get('textarea#mpChangelog')
+    const editor2 = tinyMCE.get('mpChangelog')
     if (editor2 !== null) {
-      editor2.destroy()
+      editor2.remove()
     }
   },
   methods: {
     /**
-     * Load dynamically script (for TinyMCE)
-     * @param {String} script The script
+     * Load dynamically TinyMCE
+     * @return {Promise} The promise of load
      * @private
      */
-    _DSL (script) {
+    _DSL_TinyMCE () {
       return new Promise((resolve) => {
-        const scriptElem = document.createElement('script')
-        scriptElem.setAttribute('type', 'text/javascript')
-        scriptElem.setAttribute('src', script)
-        scriptElem.addEventListener('load', () => {
-          resolve()
-        })
+        if (typeof tinyMCE === 'undefined') {
+          const scriptElem = document.createElement('script')
+          scriptElem.setAttribute('type', 'text/javascript')
+          scriptElem.setAttribute('src', '/assets/tinymce/tinymce.min.js')
+          scriptElem.addEventListener('load', () => {
+            resolve()
+          })
 
-        document.body.appendChild(scriptElem)
-        document.body.removeChild(scriptElem)
+          document.body.appendChild(scriptElem)
+          document.body.removeChild(scriptElem)
+        } else {
+          resolve()
+        }
       })
     },
 
@@ -231,10 +239,10 @@ export default {
           name: 'Zip Files',
           extensions: ['zip']
         }]
-      }, (folderPaths) => {
-        if (folderPaths !== undefined) {
-          LauncherLog.debug('Loading mod pack zip (' + folderPaths[0] + ')')
-          this.readZip = new ReadZip(folderPaths[0])
+      }, (filePaths) => {
+        if (filePaths !== undefined) {
+          LauncherLog.debug('Loading mod pack zip (' + filePaths[0] + ')')
+          this.readZip = new ReadZip(filePaths[0])
           const containsFolders = this.readZip.getDirectories().filter((entry) => (entry.entryName === 'config/') || (entry.entryName === 'mods/')).length === 2
 
           if (containsFolders) {
@@ -242,15 +250,15 @@ export default {
               (this.readZip.getFiles(/config(?:\/|\\)(.*(?:\.cfg|\.json))/).length > 0)
 
             if (!correct) {
-              LauncherLog.debug('The mod pack zip "' + folderPaths[0] + '" is not correct')
+              LauncherLog.debug('The mod pack zip "' + filePaths[0] + '" is not correct')
               Alert.dispatch('alert', {
                 type: 'error',
                 message: Vue.t('components.mpEditor.mpLocationIncorrect')
               })
             } else {
-              LauncherLog.debug('The mod pack zip "' + folderPaths[0] + '" is loaded')
-              this.mpLocation = folderPaths[0]
-              this.zipFile = fs.readFileSync(folderPaths[0])
+              LauncherLog.debug('The mod pack zip "' + filePaths[0] + '" is loaded')
+              this.mpLocation = filePaths[0]
+              this.zipFile = fs.readFileSync(filePaths[0])
               this.nextStep()
             }
           }
@@ -392,35 +400,50 @@ export default {
       }, 100)
     },
 
-    logoChange () {
-      LauncherLog.debug('Loading logo (' + this.$refs['mpLogo'].value + ')')
-      const img = new Image()
-      img.onload = () => {
-        if ((img.naturalWidth === 64) && (img.naturalHeight === 64)) {
-          const fileReader = new FileReader()
-          fileReader.onload = (event) => {
-            this.modPack.logo = event.target.result
+    /**
+     * Select the mod pack logo
+     */
+    selectMpLogo () {
+      remote.dialog.showOpenDialog({
+        title: Vue.t('components.mpEditor.selectMpLogo'),
+        properties: ['openFile'],
+        defaultPath: SettingsStore.getters.settings.general.installPath,
+        filters: [{
+          name: 'PNG Files',
+          extensions: ['png']
+        }]
+      }, (filePaths) => {
+        if (filePaths !== undefined) {
+          LauncherLog.debug('Loading logo (' + filePaths[0] + ')')
+          const img = new Image()
+          img.onload = () => {
+            if ((img.naturalWidth === 64) && (img.naturalHeight === 64)) {
+              const fileReader = new FileReader()
+              fileReader.onload = (event) => {
+                this.modPack.logo = event.target.result
 
-            this.mpLogo = this.$refs['mpLogo'].value
-            LauncherLog.debug('The logo "' + this.$refs['mpLogo'].value + '" is loaded')
+                this.mpLogo = filePaths[0]
+                LauncherLog.debug('The logo "' + filePaths[0] + '" is loaded')
+              }
+              fileReader.onabort = fileReader.onerror = () => {
+                LauncherLog.debug('The logo "' + filePaths[0] + '" can\'t read')
+                Alert.dispatch('alert', {
+                  type: 'error',
+                  message: Vue.t('components.mpEditor.mpLogo_cantRead')
+                })
+              }
+              fileReader.readAsArrayBuffer(fs.readFileSync(filePaths[0]))
+            } else {
+              LauncherLog.debug('The logo "' + filePaths[0] + '" not 64x64')
+              Alert.dispatch('alert', {
+                type: 'error',
+                message: Vue.t('components.mpEditor.mpLogo_errorSize')
+              })
+            }
           }
-          fileReader.onabort = fileReader.onerror = () => {
-            LauncherLog.debug('The logo "' + this.$refs['mpLogo'].value + '" can\'t read')
-            Alert.dispatch('alert', {
-              type: 'error',
-              message: 'L\'image sélectionné ne peut pas être lu'
-            })
-          }
-          fileReader.readAsDataURL(this.$refs['mpLogo'].files[0])
-        } else {
-          LauncherLog.debug('The logo "' + this.$refs['mpLogo'].value + '" not 64x64')
-          Alert.dispatch('alert', {
-            type: 'error',
-            message: 'L\'image sélectionné ne fait pas du 64x64 pixels'
-          })
+          img.src = filePaths[0]
         }
-      }
-      img.src = this.$refs['mpLogo'].value
+      })
     }
   }
 }
