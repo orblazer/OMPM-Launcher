@@ -1,4 +1,10 @@
 @import "./_colors.scss";
+// Parts
+@import "./parts/button";
+@import "./parts/form";
+@import "./parts/modal";
+@import "./parts/scrollBar";
+@import "./parts/transition";
 
 html {
   height : 100%;
@@ -106,13 +112,13 @@ section#app > .container {
   flex-direction  : row;
   justify-content : space-between;
 
-  & > .navbar {
-    width : 17%;
+  & > .navBar {
+    width : 14.5%;
   }
 
   & > .content {
     background-color : $background-transparent;
-    width            : 82%;
+    width            : 84%;
     overflow         : auto;
   }
 }

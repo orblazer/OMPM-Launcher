@@ -27,7 +27,7 @@ export default new Vuex.Store({
             results[0].forEach((modPack, key) => {
               modPack.authors = JSON.parse(modPack.authors)
               if (modPack.logo === null) {
-                modPack.logo = '/assets/img/defaultMp.png'
+                modPack.logo = './assets/img/defaultMp.png'
               }
 
               modPack.coreMods = []

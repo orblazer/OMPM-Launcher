@@ -8,3 +8,4 @@ thumbs.db
 .idea
 *.iml
 yarn.lock
+launcher.log

@@ -1,0 +1,15 @@
+@import "../colors";
+
+.btn {
+  border           : none;
+  background-color : $btn-bg;
+  padding          : 10px 15px;
+  cursor           : pointer;
+  color            : white;
+  outline          : none;
+  transition       : background-color .15s;
+
+  &:hover {
+    background-color : $btn-hover_bg;
+  }
+}

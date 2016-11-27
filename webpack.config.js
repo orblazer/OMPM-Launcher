@@ -70,7 +70,9 @@ let config = {
       template: './app/index.html',
       title: settings.name
     }),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new webpack.IgnorePlugin(/^mock-firmata$/),
+    new webpack.ContextReplacementPlugin(/bindings$/, /^$/)
   ],
   output: {
     filename: '[name].js',
@@ -78,8 +80,9 @@ let config = {
   },
   resolve: {
     alias: {
-      'components': path.join(__dirname, 'app/src/components'),
-      'src': path.join(__dirname, 'app/src')
+      components: path.join(__dirname, 'app/src/components'),
+      src: path.join(__dirname, 'app/src'),
+      'vue$': 'vue/dist/vue.js'
     },
     extensions: ['', '.js', '.vue', '.json', '.css'],
     fallback: [path.join(__dirname, 'app/node_modules')]

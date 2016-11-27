@@ -1,4 +1,4 @@
-@import "../../assets/style/_colors.scss";
+@import "../../assets/style/colors";
 
 .console {
   position : relative;
@@ -16,7 +16,7 @@
     }
 
     & > .tabs-content {
-      height              : 90.55%;
+      height              : 91.2%;
       -webkit-user-select : initial; -moz-user-select : initial; -ms-user-select : initial; user-select : initial;
       cursor              : auto;
       padding             : 0;
@@ -58,6 +58,7 @@
     & > .selectAutoScroll {
       display      : flex;
       margin-right : 25px;
+      line-height: 25px;
 
       & > .autoScroll {
         display          : inline-block;

@@ -4,9 +4,9 @@
  * @author orblazer <orblazer@relonar.fr>
  * @created 25/11/2016
  */
+global.Vue = require('vue/dist/vue')
 import os from 'os'
 import path from 'path'
-import Vue from 'vue'
 import Vuex from 'vuex'
 import Resource from 'vue-resource'
 import { remote } from 'electron'
@@ -24,7 +24,7 @@ i18n(Vue).then(() => {
   /**
    * Initialize Vue
    */
-  new Vue({
+  global.App = new Vue({
     router: Router(Vue),
     data: {
       version: require('../package.json').version,

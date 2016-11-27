@@ -1,29 +1,116 @@
 {
-  "navigation": {
-    "modPacks": "Pack de mods",
-    "instances": "Instances",
-    "manage": "Gestion",
-    "editor": "Editeur",
-    "console": "Console",
-    "settings": "Paramètres",
-    "logout": "Déconnexion"
+  "__NAME__": "Français",
+  "unknown": "Inconnu",
+  "components": {
+    "navigation": {
+      "modPacks": "Pack de mods",
+      "instances": "Instances",
+      "manage": "Gestion",
+      "editor": "Editeur",
+      "console": "Console",
+      "settings": "Paramètres",
+      "logout": "Déconnexion"
+    },
+    "modPack": {
+      "info": {
+        "title": "Informations",
+        "name": "Nom",
+        "authors": "Auteur | Auteurs",
+        "version": "Version",
+        "mcVersion": "Version de Minecraft",
+        "forgeVersion": "Version de forge"
+      },
+      "action": {
+        "makeInstance": "Créer une instance",
+        "downloadServer": "Télécharger le serveur"
+      },
+      "mods": {
+        "tabs": {
+          "core": "Mod essentiel | Mods essentiels",
+          "mods": "Mod requis | Mods requis",
+          "optional": "Mod optionel | Mods optionels"
+        },
+        "name": "Nom",
+        "version": "Version",
+        "authors": "Auteur(s)",
+        "noCore": "Aucun mods n'est essentiels",
+        "noMods": "Aucun mods n'est requis",
+        "noOptional": "Aucun mods n'est optionnel"
+      },
+      "makeInstance": {
+        "title": "Création d'une instance",
+        "name": "Nom de l'instance",
+        "version": "Version de l'instance",
+        "submit": "Créer l'instance"
+      }
+    }
   },
   "auth": {
     "logout": "Vous êtes désormais déconnecté."
   },
-  "console": {
-    "send": "Envoyer les logs.",
-    "autoScroll": "Défilement automatique ?"
-  },
-  "initialize": {
-    "loading": "Chargement...",
-    "checkServer": {
-      "loading": "Connexion au serveur...",
-      "fail": "Impossible de ce connecté au serveur."
+  "pages": {
+    "initialize": {
+      "loading": "Chargement...",
+      "checkServer": {
+        "loading": "Connexion au serveur...",
+        "fail": "Impossible de ce connecté au serveur."
+      },
+      "checkUpdate": {
+        "loading": "Recherche de mises à jour...",
+        "upToDate": "Le launcher est à jour."
+      },
+      "downloadUpdate": {
+        "loading": "Téléchargement des mises à jour..."
+      },
+      "versions": {
+        "loading": "Chargement des versions disponnible...",
+        "done": "Les versions disponnible ont été chargé.",
+        "fail": "Les versions n'ont pas pus être chargé."
+      },
+      "modPacks": {
+        "loading": "Chargement des packs de mods...",
+        "done": "Les packs de mods ont été chargé.",
+        "fail": "Les packs de mods n'ont pas pus être chargé."
+      },
+      "instances": {
+        "loading": "Chargement des instances...",
+        "done": "Les instances ont été chargé.",
+        "fail": "Les instances n'ont pas pus être chargé."
+      },
+      "settings": {
+        "loading": "Chargement des paramètres...",
+        "done": "Les paramètres ont été chargé.",
+        "fail": "Les paramètres n'ont pas pus être chargé."
+      }
     },
-    "checkUpdate": {
-      "loading": "Recherche de mises à jour...",
-      "upToDate": "Le launcher est à jour."
+    "modPacks": {
+      "by": "Par",
+      "created": "Créer le",
+      "updated": "Dernière MAJ le"
+    },
+    "console": {
+      "send": "Envoyer les logs.",
+      "autoScroll": "Défilement automatique ?"
+    },
+    "settings": {
+      "save": {
+        "done": "Les paramètres ont bien été sauvegardé.",
+        "fail": "Les paramètres n'ont pas pus êtres sauvegardé."
+      },
+      "tabs": {
+        "global": "Général",
+        "java": "Java"
+      },
+      "gameLocation": "Emplacement des dossier",
+      "launcherVisibility": {
+        "label": "Visibilité du launcher",
+        "always": "Gardez le launcher ouvert",
+        "hidden": "Cacher le launcher au lancement du jeu",
+        "close": "Fermer le launcher au lancement du jeu"
+      },
+      "javaLocation": "Emplacement de java",
+      "allocatedRam": "RAM alloué",
+      "submit": "Sauvegarder"
     }
   }
 }

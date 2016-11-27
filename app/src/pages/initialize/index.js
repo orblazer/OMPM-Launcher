@@ -4,7 +4,6 @@
  * @author orblazer <orblazer@relonar.fr>
  * @created 27/10/2016
  */
-import Vue from 'vue'
 import { remote } from 'electron'
 import SIOClient from '../../lib/SocketIO/SIOClient'
 import LauncherLog from '../../lib/log/LauncherLog'
@@ -12,19 +11,18 @@ import VersionsStore from '../../store/VersionsStore'
 import ModPacksStore from '../../store/ModPacksStore'
 import InstancesStore from '../../store/InstancesStore'
 import SettingsStore from '../../store/SettingsStore'
-import progressBar from '../../components/progressBar/index.vue'
-const serverUrl = 'http://download.relonar.fr/tmpLauncher/'
+import ProgressBar from '../../components/progressBar/index.vue'
 
 export default {
   name: 'Initialize',
   components: {
-    progressBar
+    ProgressBar
   },
   data () {
     return {
       progress: 0,
       step: 6,
-      status: Vue.t('initialize.loading')
+      status: Vue.t('pages.initialize.loading')
     }
   },
   mounted () {
@@ -45,13 +43,13 @@ export default {
      * End the loading
      * @param {Object} redirect The redirect
      */
-    doneLoading (redirect) {
+    doneLoading (redirect = undefined) {
       if (redirect === undefined) {
         if (this.$parent.$route.query.redirect === '/initialize') {
           this.$parent.$route.query.redirect = '/modPacks'
         }
 
-        this.$parent.$router.push(this.$parent.$route.query.redirect)
+        this.$parent.$router.push(this.$parent.$route.query.redirect || '/modPacks')
       } else {
         this.$parent.$router.push(redirect)
       }
@@ -62,19 +60,21 @@ export default {
      * Check the server
      */
     checkServer () {
-      this.status = Vue.t('initialize.checkServer.loading')
+      this.status = Vue.t('pages.initialize.checkServer.loading')
       const cantConnect = () => {
-        this.status = Vue.t('initialize.checkServer.fail')
+        this.status = Vue.t('pages.initialize.checkServer.fail')
         this.increaseProgress()
         LauncherLog.error('Can\'t connect to server, use local launcher')
+
         setTimeout(() => {
-          // this.doneLoading('/instances')
+          this.doneLoading('/instances')
         }, 100)
       }
 
-      this.$http.get('http://localhost:8080/').then(() => {
+      Vue.http.get('http://localhost:8080/').then(() => {
         this.$parent.serverAvailable = true
         let runned = false
+
         // noinspection Eslint
         new SIOClient(() => {
           if (!runned) {
@@ -90,24 +90,21 @@ export default {
      * Check the update
      */
     checkUpdate () {
-      this.status = Vue.t('initialize.checkUpdate.loading')
-      Vue.http.post(serverUrl + 'version').then((response) => {
-        const currVersion = require('../../../package.json').version
+      this.status = Vue.t('pages.initialize.checkUpdate.loading')
 
-        if (response.body !== currVersion) {
+      sioClient.emit('checkVersion', (version) => {
+        if (App.version !== version) {
           this.downloadUpdate()
-          this.step = 4
+          this.step += 1
           this.increaseProgress()
         } else {
-          this.status = Vue.t('initialize.checkUpdate.upToDate')
+          this.status = Vue.t('pages.initialize.checkUpdate.upToDate')
           this.increaseProgress()
 
           setTimeout(() => {
             this.getVersions()
           }, 100)
         }
-      }).catch(function () {
-        console.warn(arguments)
       })
     },
 
@@ -115,7 +112,7 @@ export default {
      * Download the update
      */
     downloadUpdate () {
-      this.status = 'Téléchargement des mises à jour...'
+      this.status = Vue.t('pages.initialize.downloadUpdate.loading')
       // TODO 27/10/2016 Make this !!!!!!
     },
 
@@ -123,15 +120,18 @@ export default {
      * Get the versions
      */
     getVersions () {
-      this.status = 'Chargement des versions disponnible...'
+      this.status = Vue.t('pages.initialize.versions.loading')
       VersionsStore.dispatch('initialize').then(() => {
-        this.status = 'Les versions disponnible ont été chargé.'
+        this.status = Vue.t('pages.initialize.versions.done')
         this.increaseProgress()
 
         setTimeout(() => {
           this.getModPacks()
         }, 100)
       }).catch((err) => {
+        this.status = Vue.t('pages.initialize.versions.fail')
+        this.increaseProgress()
+
         console.error(err)
       })
     },
@@ -140,15 +140,18 @@ export default {
      * Get the mod packs
      */
     getModPacks () {
-      this.status = 'Chargement des packs de mods...'
+      this.status = Vue.t('pages.initialize.modPacks.loading')
       ModPacksStore.dispatch('initialize').then(() => {
-        this.status = 'Les packs de mods ont été chargé.'
+        this.status = Vue.t('pages.initialize.modPacks.done')
         this.increaseProgress()
 
         setTimeout(() => {
           this.getInstances()
         }, 100)
       }).catch((err) => {
+        this.status = Vue.t('pages.initialize.modPacks.fail')
+        this.increaseProgress()
+
         console.error(err)
       })
     },
@@ -157,15 +160,18 @@ export default {
      * Get the instances
      */
     getInstances () {
-      this.status = 'Chargement des instances...'
+      this.status = Vue.t('pages.initialize.instances.loading')
       InstancesStore.dispatch('initialize').then(() => {
-        this.status = 'Les instances ont été chargé.'
+        this.status = Vue.t('pages.initialize.instances.done')
         this.increaseProgress()
 
         setTimeout(() => {
           this.getSettings()
         }, 100)
       }).catch((err) => {
+        this.status = Vue.t('pages.initialize.instances.fail')
+        this.increaseProgress()
+
         console.error(err)
       })
     },
@@ -174,15 +180,21 @@ export default {
      * Get the settings
      */
     getSettings () {
-      this.status = 'Chargement des paramètres...'
+      this.status = Vue.t('pages.initialize.settings.loading')
       SettingsStore.dispatch('initialize').then(() => {
-        this.status = 'Les paramètres ont été chargé'
+        this.status = Vue.t('pages.initialize.settings.done')
         this.increaseProgress()
 
         setTimeout(() => {
           this.doneLoading()
         }, 100)
       }).catch((err) => {
+        this.increaseProgress()
+
+        setTimeout(() => {
+          this.doneLoading()
+        }, 100)
+
         console.error(err)
       })
     }

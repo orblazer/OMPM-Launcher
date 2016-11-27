@@ -1,0 +1,21 @@
+@import "../colors";
+
+::-webkit-scrollbar {
+  width          : 10px;
+  height         : 10px;
+  pointer-events : none;
+  cursor         : n-resize;
+}
+
+::-webkit-scrollbar-thumb {
+  border-left      : 1px solid $scrollBar-track;
+  background-color : $scrollBar-thumb;
+
+  &:hover {
+    background-color : $scrollBar-thumb-hover;
+  }
+}
+
+::-webkit-scrollbar-track, ::-webkit-scrollbar-corner {
+  background-color : $scrollBar-track;
+}

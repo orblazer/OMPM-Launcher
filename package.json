@@ -9,7 +9,7 @@
     "build:linux": "cross-env PLATFORM_TARGET=linux node tasks/release.js",
     "build:mas": "cross-env PLATFORM_TARGET=mas node tasks/release.js",
     "build:win32": "cross-env PLATFORM_TARGET=win32 node tasks/release.js",
-    "dev": "set NODE_PATH=. && node tasks/runner.js",
+    "dev": "node tasks/runner.js",
     "e2e": "npm run pack && mocha test/e2e",
     "lint": "eslint --ext .js,.vue -f ./node_modules/eslint-friendly-formatter app test",
     "lint:fix": "eslint --ext .js,.vue -f ./node_modules/eslint-friendly-formatter --fix app test",
@@ -29,7 +29,7 @@
       "email": "adrien1975@live.fr"
     }
   ],
-  "license": "GPLv3",
+  "license": "GPL-3.0",
   "devDependencies": {
     "babel-core": "^6.8.0",
     "babel-eslint": "^7.0.0",

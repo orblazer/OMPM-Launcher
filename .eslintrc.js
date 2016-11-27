@@ -12,7 +12,7 @@ module.exports = {
   plugins: [
     'html'
   ],
-  'rules': {
+  rules: {
     // allow paren-less arrow functions
     'arrow-parens': 0,
     // allow async-await
@@ -21,14 +21,9 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   },
   globals: {
-    'Image': true,
-    'FileReader': true,
-    'Vue': true,
-    'App': true,
-    'MySQL': true,
-    'tinyMCE': true,
-    'io': true,
-    'SocketIOFileUpload': true,
-    'sioClient': true
-  }
+    Vue: true,
+    App: true,
+    sioClient: true,
+    SocketIOFileUpload: true
+  },
 }

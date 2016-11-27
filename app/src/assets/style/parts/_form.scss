@@ -1,0 +1,142 @@
+@import "../colors";
+
+form {
+  .input-control {
+    display         : flex;
+    margin-bottom   : 10px;
+    justify-content : center;
+
+    & > label {
+      text-align   : right;
+      cursor       : pointer;
+      margin-right : 2.5%;
+      width        : 35%;
+
+      & > i {
+        color: gray;
+      }
+    }
+
+    & > input, & > select, & > textarea {
+      z-index             : 10;
+      width               : 45%;
+      height              : 25px;
+      border              : none;
+      padding             : 5px;
+      margin-left         : 2.5%;
+      margin-top          : 1px;
+      background-color    : $background;
+      color               : white !important;
+      text-align          : center;
+      outline             : 1px solid $login-input;
+      transition          : outline .15s;
+      outline-offset      : 0;
+      -webkit-user-select : initial; -moz-user-select : initial; -ms-user-select : initial; user-select : initial;
+      cursor              : text;
+
+      &:focus:not(.success):not(.error), &:hover:not(.success):not(.error) {
+        outline-color : $login-hover;
+      }
+
+      &.success {
+        outline-color : $login-success;
+        &:focus, &:hover { outline-color : $login-success-hover; }
+      }
+      &.error {
+        outline-color : $login-error;
+        &:focus, &:hover { outline-color : $login-error-hover; }
+      }
+
+      &:-webkit-autofill {
+        -webkit-box-shadow      : 0 0 0 1000px #1c2128 inset;
+        -webkit-text-fill-color : white !important;
+      }
+    }
+
+    & > textarea {
+      height      : auto;
+      min-height  : 25px;
+      resize      : vertical;
+      text-align  : left;
+      font-family : "Open Sans";
+    }
+
+    & > select {
+      text-align-last : center;
+      cursor          : pointer;
+    }
+
+    &.folderSelection {
+      & > .folderInput {
+        display    : none;
+        visibility : hidden;
+      }
+
+      & > .folderSelectInput {
+        width            : 45%;
+        height           : 25px;
+        padding          : 2px;
+        margin-left      : 2.5%;
+        background-color : $background;
+        color            : white;
+        text-align       : center;
+        outline          : 1px solid $login-input;
+        transition       : outline .15s;
+        font-size        : 13px;
+        margin-right     : 0;
+        overflow         : hidden;
+
+        &:focus:not(.success):not(.error), &:hover:not(.success):not(.error) {
+          outline-color : $login-hover;
+        }
+
+        &.success {
+          outline-color : $login-success;
+          &:focus, &:hover { outline-color : $login-success-hover; }
+        }
+        &.error {
+          outline-color : $login-error;
+          &:focus, &:hover { outline-color : $login-error-hover; }
+        }
+      }
+    }
+  }
+
+  .submit-control {
+    display         : flex;
+    justify-content : flex-end;
+    width           : 92.5%;
+
+    &.left {
+      justify-content : flex-start;
+    }
+    &.between {
+      justify-content : space-between;
+    }
+    &.center {
+      justify-content : space-around;
+    }
+    &.full {
+      width : 100%;
+    }
+
+    & > input:not(.btn) {
+      border     : none;
+      font-size  : 1em;
+      background : none;
+      color      : white;
+      cursor     : pointer;
+      transition : color .1s;
+      outline    : none;
+      padding    : 0;
+
+      &:hover {
+        color : $green;
+      }
+      &:disabled {
+        color  : gray;
+        cursor : not-allowed;
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+ /* Fade */
+.fade-enter-active, .fade-leave-active {
+  transition : opacity .3s;
+}
+
+.fade-2-enter-active, .fade-2-leave-active {
+  transition : opacity .15s;
+}
+
+.fade-enter, .fade-leave,
+.fade-2-enter, .fade-2-leave {
+  opacity : 0;
+}
+
+/* slide */
+.slide-enter-active, .slide-leave-active {
+  animation-duration        : .4s;
+  animation-name            : animSlideIn;
+  animation-timing-function : ease-in-out;
+}
+
+.slide-leave-active {
+  animation-name : animSlideOut;
+}
+
+@keyframes animSlideIn {
+  0% {
+    transform : translateX(100%);
+  }
+  50% {
+    transform : translateX(-10%);
+  }
+  100% {
+    transform : translateX(0);
+  }
+}
+
+@keyframes animSlideOut {
+  0% {
+    transform : translateX(0);
+  }
+  50% {
+    transform : translateX(-10%);
+  }
+  100% {
+    transform  : translateX(100%);
+    visibility : hidden;
+  }
+}

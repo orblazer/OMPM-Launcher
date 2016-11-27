@@ -1,0 +1,75 @@
+@import "../../assets/style/colors";
+
+.modPacks {
+  position : relative;
+  height   : 100%;
+
+  & > .mpEditor {
+    display          : flex;
+    justify-content  : flex-end;
+    margin-bottom    : 10px;
+    background-color : $background;
+
+    & > a {
+      padding : 3px 6px;
+    }
+  }
+
+  & > ul {
+    margin     : 0;
+    padding    : 0;
+    list-style : none;
+
+    & > .modPack {
+      display          : flex;
+      flex-direction   : row;
+      background-color : $background;
+      padding          : 5px;
+
+      &:not(:last-child) {
+        margin-bottom : 10px;
+      }
+
+      & > .mp-img {
+        display    : block;
+        min-height : 64px;
+        width      : 64px;
+        margin     : auto 0 auto 5px;
+      }
+
+      & > .mp-info {
+        margin-left : 15px;
+
+        & > .title {
+          font-size  : 18px;
+          margin     : 0;
+          cursor     : pointer;
+          transition : color .15s;
+
+          & > .beta {
+            color : $console-warn;
+          }
+          & > .alpha {
+            color : $console-error;
+          }
+
+          &:hover {
+            color : $green;
+          }
+        }
+
+        & > footer {
+          color     : gray;
+          font-size : 14px;
+        }
+      }
+    }
+  }
+
+  & > h2 {
+    margin     : 0;
+    padding    : 5px 15px;
+    color      : $red;
+    text-align : center;
+  }
+}

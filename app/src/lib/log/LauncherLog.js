@@ -70,7 +70,7 @@ class LauncherLog {
    * @param {*} data
    */
   static debug (...data) {
-    if (require('../../../package.json').debug) {
+    if (require('../../../../config').debug) {
       this._saveLog('DEBUG', data)
     }
   }

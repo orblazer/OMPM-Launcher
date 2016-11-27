@@ -1,0 +1,105 @@
+@import "../../assets/style/colors";
+
+.mp-moreInfo {
+  top       : 0 !important;
+  left      : 0 !important;
+  height    : 100%;
+  min-width : 100% !important;
+  transform : none !important;
+
+  & > .modal-content {
+    & > .mp-globalInfo {
+      display         : flex;
+      flex-direction  : row;
+      justify-content : space-between;
+
+      & > .info, & > .action {
+        display        : flex;
+        flex-direction : column;
+      }
+
+      & > .info > h1 {
+        font-size : 16px;
+        margin    : 0 0 0 10px;
+      }
+
+      & > .action {
+        padding : 10px;
+
+        & > .btn:not(:last-child) {
+          margin-bottom : 5px;
+        }
+      }
+    }
+
+    & > .mp-mods > .tabs-control > li.active ~ .tabs-content > table[id=mods] {
+      display : block;
+    }
+
+    & > .mp-mods {
+      margin-top: 10px;
+
+      & > .tabs-control {
+        margin-top       : 10px;
+        background-color : $background-transparent;
+      }
+
+      & > .tabs-content {
+        height     : 100%;
+        max-height : 350px;
+        overflow   : auto;
+
+        table {
+          width           : 100%;
+          border-collapse : collapse;
+
+          & > thead {
+            background-color : $table_head;
+
+            & > tr > th:first-child {
+              padding-left : 6px;
+            }
+          }
+
+          & > tbody > tr > td:first-child {
+            padding-left : 10px;
+          }
+          & > tbody > tr > td:not(:first-child) {
+            padding-left : 5px;
+          }
+        }
+
+        h3 {
+          margin     : 5px 15px;
+          color      : $red;
+          text-align : center;
+        }
+      }
+    }
+  }
+}
+
+.mp-makeInstance {
+  position         : absolute;
+  top              : 0;
+  left             : 0;
+  bottom           : 0;
+  right            : 0;
+  background-color : $background-transparent-2;
+
+  & > .modal {
+    min-width : 55%;
+
+    & > .modal-content {
+      padding          : 10px 10px 15px 10px;
+      background-color : $table_head;
+
+      .beta {
+        color : $console_warn;
+      }
+      .alpha {
+        color : $console_error;
+      }
+    }
+  }
+}

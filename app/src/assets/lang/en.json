@@ -1,11 +1,15 @@
 {
-  "navigation": {
-    "modPacks": "Mods packs",
-    "instances": "Instances",
-    "manage": "Manage",
-    "editor": "Editor",
-    "console": "Console",
-    "settings": "Settings",
-    "logout": "Logout"
+  "__NAME__": "English",
+  "unknown": "Unknown",
+  "components": {
+    "navigation": {
+      "modPacks": "Mods packs",
+      "instances": "Instances",
+      "manage": "Manage",
+      "editor": "Editor",
+      "console": "Console",
+      "settings": "Settings",
+      "logout": "Logout"
+    }
   }
 }

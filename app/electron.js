@@ -30,7 +30,10 @@ function createWindow () {
     title: 'OMPM Launcher',
     frame: false,
     resizable: false,
-    center: true
+    center: true,
+    webPreferences: {
+      webSecurity: false
+    }
   })
 
   mainWindow.loadURL(config.url)

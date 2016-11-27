@@ -7,7 +7,9 @@
 import VueRouter from 'vue-router'
 import AuthStore from './store/AuthStore'
 import Initialize from './pages/initialize/index.vue'
+import ModPacks from './pages/modPacks/index.vue'
 import Console from './pages/console/index.vue'
+import Settings from './pages/settings/index.vue'
 
 export default (Vue) => {
   Vue.use(VueRouter)
@@ -18,25 +20,35 @@ export default (Vue) => {
     component: Initialize,
     meta: { customRender: true }
   }, {
-    name: 'modPacks',
-    path: '/modPacks'/*,
-    component: require('./components/modPacks/index').default*/
-    // meta: { requiresAuth: true }
-  }, {
-    name: 'instances',
-    path: '/instances'/*,
-    component: require('./components/instances/index').default*/
-    // meta: { requiresAuth: true }
-  }, {
-    name: 'settings',
-    path: '/settings'/*,
-    component: require('./components/settings/index').default*/
-    // meta: { requiresAuth: true }
-  }, {
     name: 'login',
     path: '/login',
     // component: require('./components/login/index').default,
     meta: { customRender: true }
+  }, {
+    name: 'modPacks',
+    path: '/modPacks',
+    component: ModPacks
+    // meta: { requiresAuth: true }
+  }, {
+    name: 'instances',
+    path: '/instances'/*,
+     component: require('./components/instances/index').default*/
+    // meta: { requiresAuth: true }
+  }, {
+    name: 'manage',
+    path: '/manage'/*,
+     component: require('./components/manage/index').default*/
+    // meta: { requiresAuth: true }
+  }, {
+    name: 'console',
+    path: '/console',
+    component: Console
+    // meta: { requiresAuth: true }
+  }, {
+    name: 'settings',
+    path: '/settings',
+    component: Settings
+    // meta: { requiresAuth: true }
   }, {
     name: 'logout',
     path: '/logout',
@@ -49,16 +61,6 @@ export default (Vue) => {
         })
       })
     }
-  }, {
-    name: 'manage',
-    path: '/manage'/*,
-    component: require('./components/manage/index').default*/
-    // meta: { requiresAuth: true }
-  }, {
-    name: 'console',
-    path: '/console',
-    component: Console
-    // meta: { requiresAuth: true }
   }, {
     path: '*',
     redirect: '/initialize'

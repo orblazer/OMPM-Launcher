@@ -10,7 +10,7 @@ import LauncherLog from '../../lib/log/LauncherLog'
 export default {
   name: 'Console',
   components: {
-    Tabs: require('../../components/tabs/index').default,
+    Tabs: require('../../components/tabs/index.vue'),
     Tab: require('../../components/tabs/tab').default
   },
   data () {

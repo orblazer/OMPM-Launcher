@@ -4,16 +4,19 @@
   "description": "The launcher for custom Minecraft ModPacks",
   "main": "electron.js",
   "dependencies": {
+    "bufferutil": "^1.2.1",
     "electron": "^1.4.8",
     "jquery": "^3.1.1",
     "less": "^2.7.1",
+    "socket.io": "^1.6.0",
+    "socket.io-client": "^1.6.0",
+    "utf-8-validate": "^1.2.1",
     "vue": "^2.0.1",
     "vue-i18n": "^4.7.3",
     "vue-resource": "^1.0.3",
     "vue-router": "^2.0.0",
     "vuex": "^2.0.0"
   },
-  "devDependencies": {},
   "author": {
     "name": "Orblazer",
     "email": "orblazer@relonar.fr",
@@ -25,5 +28,5 @@
       "email": "adrien1975@live.fr"
     }
   ],
-  "license": "GPLv3"
+  "license": "GPL-3.0"
 }

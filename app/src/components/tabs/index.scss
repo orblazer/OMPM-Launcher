@@ -1,4 +1,4 @@
-@import "../../assets/style/_colors.scss";
+@import "../../assets/style/colors";
 
 .tabs {
   & > .tabs-control {
@@ -31,11 +31,7 @@
     }
   }
 
-  & > .tabs-content {
-    padding : 15px;
-
-    .tabs-content {
-      padding : 0;
-    }
+  & > .tabs-content .tabs-content {
+    padding : 0;
   }
 }

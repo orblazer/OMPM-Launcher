@@ -11,6 +11,9 @@ let config = {
   // Will be used in production builds
   name: 'ompm_launcher',
 
+  // Debug the launcher
+  debug: true,
+
   // Use ESLint (extends `standard`)
   // Further changes can be made in `.eslintrc.js`
   eslint: true,
