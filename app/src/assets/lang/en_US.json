@@ -13,7 +13,8 @@
       "editor": "Editor",
       "console": "Console",
       "settings": "Settings",
-      "logout": "Logout"
+      "logout": "Logout",
+      "login": "Login"
     },
     "modPack": {
       "info": {

@@ -10,3 +10,4 @@ thumbs.db
 *.iml
 yarn.lock
 launcher.log
+gource.*

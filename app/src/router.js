@@ -56,7 +56,7 @@ export default (Vue) => {
         require('./store/AlertStore').default.dispatch('alert', {
           message: Vue.t('auth.logout')
         }).then(() => {
-          next('/')
+          next('/instances')
         })
       })
     }

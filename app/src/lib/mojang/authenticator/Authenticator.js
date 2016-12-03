@@ -120,17 +120,23 @@ class Authenticator {
           return
         }
 
-        response.body.selectedProfile = new AuthProfile(...Object.values(response.body.selectedProfile))
-        response.body.availableProfiles.forEach((val, k) => {
-          response.body.availableProfiles[k] = new AuthProfile(...Object.values(val))
-        })
+        if (response.body.selectedProfile) {
+          response.body.selectedProfile = new AuthProfile(...Object.values(response.body.selectedProfile))
+        }
+        if (response.body.availableProfiles) {
+          response.body.availableProfiles.forEach((val, k) => {
+            response.body.availableProfiles[k] = new AuthProfile(...Object.values(val))
+          })
+        }
 
         resolve(Reflect.construct(model, Object.values(response.body)))
       }).catch((response) => {
         if (response.body != null) {
           reject(new AuthenticationException(new AuthError(response.body.error, response.body.errorMessage, response.body.cause)))
-        } else {
+        } else if (!(response instanceof Error)) {
           reject(new URIError('No Connection'))
+        } else {
+          reject(response)
         }
       })
     })

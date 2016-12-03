@@ -12,7 +12,8 @@
       "manage": "Gestion | Editeur",
       "console": "Console",
       "settings": "Paramètres",
-      "logout": "Déconnexion"
+      "logout": "Déconnexion",
+      "login": "Connexion"
     },
     "modPack": {
       "info": {
