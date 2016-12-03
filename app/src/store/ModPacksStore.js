@@ -23,6 +23,8 @@ export default new Vuex.Store({
     initialize (store) {
       return new Promise((resolve) => {
         sioClient.emit('getModPacks', (modPacks) => {
+          modPacks = Object.values(modPacks)
+
           if (modPacks.length > 0) {
             resolve([])
           }

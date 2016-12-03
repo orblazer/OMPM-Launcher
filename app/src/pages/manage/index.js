@@ -5,6 +5,7 @@
  * @created 06/11/2016
  */
 import ManageStore from '../../store/ManageStore'
+import AuthStore from '../../store/AuthStore'
 import Tabs from '../../components/Tabs/index.vue'
 import Tab from '../../components/Tabs/tab'
 import MPEditor from '../../components/MPEditor/index.vue'
@@ -19,7 +20,7 @@ export default {
   },
   data () {
     return {
-      canAccessAdmin: App.canAccessAdmin
+      canAccessAdmin: AuthStore.getters.user.admin_access
     }
   },
   computed: {

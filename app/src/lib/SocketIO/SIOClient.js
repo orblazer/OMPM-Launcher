@@ -7,6 +7,8 @@
 import ioClient from 'socket.io-client'
 import Alert from '../../store/AlertStore'
 import LauncherLog from '../../lib/log/LauncherLog'
+import EventEmitter from 'events'
+global.sioEvent = new EventEmitter()
 
 const _sio = Symbol('sio')
 class SIOClient {
@@ -32,6 +34,7 @@ class SIOClient {
         LauncherLog.log('Successful reconnect to server, use online launcher')
       }
 
+      sioEvent.emit('connected', this)
       if (typeof connected === 'function') {
         connected(this)
       }
@@ -52,6 +55,7 @@ class SIOClient {
       } else {
         console.warn('Disconnect for reason :', reason)
       }
+      sioEvent.emit('disconnect', reason)
     })
 
     this[_sio].on('connect_error', (err) => {

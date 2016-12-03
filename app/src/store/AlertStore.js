@@ -74,7 +74,9 @@ export default new Vuex.Store({
       }
 
       // Commit alert
-      store.commit('ALERT', data)
+      if (store.getters.alerts.filter((alert) => alert.id === data.id).length <= 0) {
+        store.commit('ALERT', data)
+      }
     },
 
     /**

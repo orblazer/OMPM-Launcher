@@ -4,9 +4,9 @@
       <i class="fa fa-server"></i> {{$t('components.navigation.modPacks')}}
     </router-link>
     <router-link to="/instances"><i class="fa fa-server"></i> {{$t('components.navigation.instances')}}</router-link>
-    <router-link to="/manage" v-if="canManage">
+    <router-link to="/manage" v-if="user.mpEditor_access || user.admin_access">
       <i class="fa fa-database"></i>
-      {{$tc('components.navigation.manage', canAdmin?1:2)}}
+      {{$tc('components.navigation.manage', user.admin_access?1:2)}}
     </router-link>
     <router-link to="/console">
       <i class="fa fa-terminal"></i> {{$t('components.navigation.console')}}</router-link>

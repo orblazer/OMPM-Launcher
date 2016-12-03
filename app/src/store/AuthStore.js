@@ -19,6 +19,10 @@ export default new Vuex.Store({
   state: {
     accessToken: '',
     auth: null,
+    user: {
+      mpEditor_access: false,
+      admin_access: false
+    },
     email: null,
     password: null
   },
@@ -30,11 +34,20 @@ export default new Vuex.Store({
      * @constructor
      */
     LOGIN (state, info) {
-      console.log(info.auth)
       state.accessToken = info.auth.accessToken
       state.auth = info.auth
       state.email = info.email
       state.password = info.password
+    },
+
+    /**
+     * Set the user login
+     * @param {Object} state The state
+     * @param {Object} user The user
+     * @constructor
+     */
+    USER_LOGIN (state, user) {
+      state.user = user
     },
 
     /**
@@ -45,11 +58,13 @@ export default new Vuex.Store({
     LOGOUT (state) {
       state.accessToken = ''
       state.auth = null
+      state.user = null
     }
   },
   getters: {
     accessToken: state => state.accessToken,
     auth: state => state.auth,
+    user: state => state.user,
     loggedIn: state => !!state.accessToken
   },
   actions: {
@@ -73,7 +88,13 @@ export default new Vuex.Store({
             })
 
             sioClient.emit('login', response.selectedProfile.id, (user) => {
-              console.log(user)
+              store.commit('USER_LOGIN', user)
+            })
+            sioEvent.once('connected', () => {
+              sioClient.emit('login', response.selectedProfile.id, (user) => {
+                console.info('Auto reconnect')
+                store.commit('USER_LOGIN', user)
+              })
             })
 
             resolve({ token: store.state.token, auth: store.state.auth })
