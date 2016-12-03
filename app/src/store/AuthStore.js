@@ -11,12 +11,15 @@ import AuthAgent from '../lib/mojang/authenticator/model/AuthAgent'
 import AuthInfo from '../lib/mojang/minecraft/AuthInfo'
 import AuthenticationException from '../lib/mojang/authenticator/AuthenticationException'
 import AuthError from '../lib/mojang/authenticator/model/AuthError'
+import { generateUUID } from '../lib/uuid'
 
 export default new Vuex.Store({
   strict: true,
   state: {
     accessToken: '',
-    auth: null
+    auth: null,
+    email: null,
+    password: null
   },
   mutations: {
     /**
@@ -26,8 +29,11 @@ export default new Vuex.Store({
      * @constructor
      */
     LOGIN (state, info) {
+      console.log(info.auth)
       state.accessToken = info.auth.accessToken
       state.auth = info.auth
+      state.email = info.email
+      state.password = info.password
     },
 
     /**
@@ -55,13 +61,14 @@ export default new Vuex.Store({
      */
     login (store, { email, password }) {
       return new Promise((resolve, reject) => {
+        const auth = new Authenticator(Authenticator.MOJANG_AUTH_URL, AuthPoints.NORMAL_AUTH_POINTS)
+
         if (!store.getters.loggedIn) {
-          const auth = new Authenticator(Authenticator.MOJANG_AUTH_URL, AuthPoints.NORMAL_AUTH_POINTS)
-          const response = auth.authenticate(AuthAgent.MINECRAFT, email, password)
+          const response = auth.authenticate(AuthAgent.MINECRAFT, email, password, generateUUID().replace('-', ''))
 
           response.then((response) => {
             store.commit('LOGIN', {
-              auth: new AuthInfo(response.selectedProfile.name, response.accessToken, response.selectedProfile.id),
+              auth: new AuthInfo(response.selectedProfile.name, response.accessToken, response.clientToken, response.selectedProfile.id),
               email: email,
               password: password
             })
@@ -69,6 +76,13 @@ export default new Vuex.Store({
             resolve({ token: store.state.token, auth: store.state.auth })
           }).catch(reject)
         } else {
+          auth.refresh(store.getters.accessToken, store.getters.auth.clientToken).then((response) => {
+            console.log(response)
+          })
+          /* auth.validate(store.getters.accessToken, store.getters.auth.clientToken).catch(() => {
+           auth.refresh(store.getters.accessToken, store.getters.clientToken)
+           })*/
+
           reject(new AuthenticationException(new AuthError('IllegalStateException', 'Already Connected')))
         }
       })
@@ -85,7 +99,8 @@ export default new Vuex.Store({
           const auth = new Authenticator(Authenticator.MOJANG_AUTH_URL, AuthPoints.NORMAL_AUTH_POINTS)
           const response = auth.signout(store.state.email, store.state.password)
 
-          response.then(() => {
+          response.then((resp) => {
+            console.log(resp)
             store.commit('LOGOUT')
             resolve()
           }).catch(reject)

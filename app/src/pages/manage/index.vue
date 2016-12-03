@@ -13,7 +13,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="modPack in modPacks">
+            <tr v-for="modPack in a">
               <td>{{modPack.name}}</td>
               <td>{{modPack.versions.length}}</td>
               <td>??</td>

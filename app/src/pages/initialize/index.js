@@ -46,10 +46,10 @@ export default {
     doneLoading (redirect = undefined) {
       if (redirect === undefined) {
         if (this.$parent.$route.query.redirect === '/initialize') {
-          this.$parent.$route.query.redirect = '/modPacks'
+          this.$parent.$route.query.redirect = '/login'
         }
 
-        this.$parent.$router.push(this.$parent.$route.query.redirect || '/modPacks')
+        this.$parent.$router.push(this.$parent.$route.query.redirect || '/login')
       } else {
         this.$parent.$router.push(redirect)
       }
@@ -94,22 +94,34 @@ export default {
 
         setTimeout(() => {
           this.doneLoading('/instances')
-        }, 100)
+        }, 200)
       }
 
-      Vue.http.get('http://localhost:8080/').then(() => {
-        this.$parent.serverAvailable = true
-        let runned = false
+      let runned = false
+      let tryConnect = 0
 
-        // noinspection Eslint
-        new SIOClient(() => {
-          if (!runned) {
+      // noinspection Eslint
+      new SIOClient(() => {
+        if (!runned) {
+          runned = true
+          this.increaseProgress()
+          this.checkUpdate()
+        }
+      }, (reason) => {
+        if (!runned) {
+          if (reason.message === 'xhr poll error') {
+            if (++tryConnect >= 5) {
+              runned = true
+              cantConnect()
+            }
+            console.warn('Try connect (' + tryConnect + ')')
+          } else {
+            console.error(reason)
             runned = true
-            this.increaseProgress()
-            this.checkUpdate()
+            cantConnect()
           }
-        }, cantConnect)
-      }).catch(cantConnect)
+        }
+      })
     },
 
     /**
@@ -167,19 +179,25 @@ export default {
      */
     getModPacks () {
       this.status = Vue.t('pages.initialize.modPacks.loading')
+      let handleError = (err) => {
+        this.status = Vue.t('pages.initialize.modPacks.fail')
+        this.increaseProgress()
+
+        console.error(err)
+      }
+
       ModPacksStore.dispatch('initialize').then(() => {
+        // MyModPacksStore.dispatch('initialize').then(() => {
+        // MyRequestsStore.dispatch('initialize').then(() => {
         this.status = Vue.t('pages.initialize.modPacks.done')
         this.increaseProgress()
 
         setTimeout(() => {
           this.getInstances()
         }, 100)
-      }).catch((err) => {
-        this.status = Vue.t('pages.initialize.modPacks.fail')
-        this.increaseProgress()
-
-        console.error(err)
-      })
+        // }).catch(handleError)
+        // }).catch(handleError)
+      }).catch(handleError)
     },
 
     /**

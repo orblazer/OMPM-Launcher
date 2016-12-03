@@ -7,6 +7,7 @@
 import VueRouter from 'vue-router'
 import AuthStore from './store/AuthStore'
 import Initialize from './pages/initialize/index.vue'
+import Login from './pages/login/index.vue'
 import ModPacks from './pages/modPacks/index.vue'
 import Manage from './pages/manage/index.vue'
 import Console from './pages/console/index.vue'
@@ -23,33 +24,30 @@ export default (Vue) => {
   }, {
     name: 'login',
     path: '/login',
-    // component: require('./components/login/index').default,
+    component: Login,
     meta: { customRender: true }
   }, {
     name: 'modPacks',
     path: '/modPacks',
-    component: ModPacks
-    // meta: { requiresAuth: true }
+    component: ModPacks,
+    meta: { requiresAuth: true, needOnline: true }
   }, {
     name: 'instances',
-    path: '/instances'/*,
-     component: require('./components/instances/index').default*/
-    // meta: { requiresAuth: true }
+    path: '/instances'
+    // component: require('./components/instances/index').default
   }, {
     name: 'manage',
     path: '/manage',
-    component: Manage
-    // meta: { requiresAuth: true }
+    component: Manage,
+    meta: { requiresAuth: true, needOnline: true }
   }, {
     name: 'console',
     path: '/console',
     component: Console
-    // meta: { requiresAuth: true }
   }, {
     name: 'settings',
     path: '/settings',
     component: Settings
-    // meta: { requiresAuth: true }
   }, {
     name: 'logout',
     path: '/logout',
@@ -63,6 +61,7 @@ export default (Vue) => {
       })
     }
   }, {
+    name: 'default',
     path: '*',
     redirect: '/initialize'
   }]

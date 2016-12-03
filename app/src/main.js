@@ -28,16 +28,32 @@ i18n(Vue).then(() => {
     router: Router(Vue),
     data: {
       version: require('../package.json').version,
-      serverAvailable: false,
-      canAccessMPEditor: false,
-      canAccessAdmin: false
+      serverAvailable: false
     },
     computed: {
       loggedIn () {
         return AuthStore.getters.loggedIn
       }
     },
+    watch: {
+      serverAvailable (newVal) {
+        if ((newVal === false) && this.$route.meta.needOnline) {
+          this.$router.push({
+            path: '/instances',
+            query: { redirect: (this.$route.meta.requiresAuth && !this.loggedIn) ? '/login?redirect=' + this.$route.path : this.$route.path }
+          })
+        } else if ((newVal === true) && this.$route.query.redirect) {
+          this.$router.push({
+            path: this.$route.query.redirect
+          })
+        }
+      }
+    },
     created () {
+      setInterval(() => {
+        console.info('auth', AuthStore.getters.loggedIn)
+      }, 1000)
+
       LauncherLog.debug('Launch core...')
       this.logComputerInfo()
     },
@@ -45,12 +61,12 @@ i18n(Vue).then(() => {
       if (this.$route.path !== '/initialize') {
         this.$router.push({
           path: '/initialize',
-          query: { redirect: this.$route.path }
+          query: { redirect: (this.$route.meta.requiresAuth && !this.loggedIn) ? '/login?redirect=' + this.$route.path : this.$route.path }
         })
       }
     },
     mounted () {
-      LauncherLog.debug('Core is launched')
+      LauncherLog.debug('Core is loaded')
     },
     methods: {
       /**

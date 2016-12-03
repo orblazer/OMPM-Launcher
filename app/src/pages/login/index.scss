@@ -1,0 +1,41 @@
+.login {
+  width       : 424px;
+  margin-left : 30%;
+  position    : relative;
+
+  & > .logo {
+    margin : 10px 0 20px 25%;
+    width  : 50%;
+  }
+
+  & > .content {
+    width  : 290px;
+    margin : 10px 0 10px 42px;
+
+    .input-control {
+      justify-content : space-between;
+
+      & > label {
+        position     : relative;
+        width        : 30px;
+        height       : 30px;
+        margin-right : 0;
+
+        & > img {
+          position : absolute;
+          top      : 1px;
+          left     : 1px;
+        }
+      }
+
+      & > input {
+        width       : 240px;
+        margin-left : 0;
+      }
+    }
+
+    .submit-control {
+      width : 100%;
+    }
+  }
+}

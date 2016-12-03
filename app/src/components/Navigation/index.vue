@@ -11,7 +11,7 @@
     <router-link to="/console">
       <i class="fa fa-terminal"></i> {{$t('components.navigation.console')}}</router-link>
     <router-link to="/settings"><i class="fa fa-gear"></i> {{$t('components.navigation.settings')}}</router-link>
-    <router-link to="/logout" v-if="loggedIn">
+    <router-link to="/login" v-if="loggedIn">
       <i class="fa fa-sign-out"></i> {{$t('components.navigation.logout')}}
     </router-link>
   </nav>

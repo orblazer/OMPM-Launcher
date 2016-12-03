@@ -53,11 +53,12 @@ class Authenticator {
    *
    * @param {string} accessToken Access token
    * @param {string} clientToken Client token
+   * @param {AuthProfile} selectedProfile Selected profile
    *
    * @return {Promise} Promise of refresh response
    */
-  refresh (accessToken, clientToken) {
-    const request = new Request.Refresh(accessToken, clientToken)
+  refresh (accessToken, clientToken = '', selectedProfile = null) {
+    const request = new Request.Refresh(this._trim(accessToken), this._trim(clientToken), selectedProfile)
     return this._sendRequest(request, RefreshResponse, this._authPoints.getRefreshPoint())
   }
 
@@ -65,11 +66,12 @@ class Authenticator {
    * Check if access token is valid
    *
    * @param {string} accessToken Access token
+   * @param {string} clientToken Client token
    *
    * @return {Promise} Promise of validate access token
    */
-  validate (accessToken) {
-    const request = new Request.Validate(accessToken)
+  validate (accessToken, clientToken = '') {
+    const request = new Request.Validate(this._trim(accessToken), this._trim(clientToken))
     return this._sendRequest(request, null, this._authPoints.getValidatePoint())
   }
 
@@ -82,7 +84,7 @@ class Authenticator {
    * @return {Promise} Promise of invalidates access token
    */
   signout (username, password) {
-    const request = new Request.Signout(username, password)
+    const request = new Request.Signout(this._trim(username), this._trim(password))
     return this._sendRequest(request, null, this._authPoints.getSignoutPoint())
   }
 
@@ -94,8 +96,8 @@ class Authenticator {
    *
    * @return {Promise} Promise of invalidates access token
    */
-  invalidate (accessToken, clientToken) {
-    const request = new Request.Invalidate(accessToken, clientToken)
+  invalidate (accessToken, clientToken = '') {
+    const request = new Request.Invalidate(this._trim(accessToken), this._trim(clientToken))
     return this._sendRequest(request, null, this._authPoints.getInvalidatePoint())
   }
 

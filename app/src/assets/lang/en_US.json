@@ -1,6 +1,10 @@
 {
   "__NAME__": "English (United States)",
   "unknown": "Unknown",
+  "server": {
+    "connectionLost": "Connection lost. <b>Trying to reconnect...</b>",
+    "connected": "The connection to the server is restored."
+  },
   "components": {
     "navigation": {
       "modPacks": "Mods packs",

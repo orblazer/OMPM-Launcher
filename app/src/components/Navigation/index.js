@@ -8,10 +8,16 @@ export default {
   name: 'Navigation',
   data () {
     return {
-      serverAvailable: this.$parent.$data.serverAvailable,
       canManage: this.$parent.$data.canAccessMPEditor || this.$parent.$data.canAccessAdmin,
-      canAdmin: this.$parent.$data.canAccessAdmin,
-      loggedIn: this.$parent.$data.loggedIn
+      canAdmin: this.$parent.$data.canAccessAdmin
+    }
+  },
+  computed: {
+    serverAvailable () {
+      return this.$parent.serverAvailable
+    },
+    loggedIn () {
+      return this.$parent.loggedIn
     }
   }
 }

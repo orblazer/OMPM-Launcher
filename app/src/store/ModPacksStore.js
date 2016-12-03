@@ -24,6 +24,10 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         sioClient.emit('getModPacks', (results) => {
           if (store.state.modPacks.length <= 0) {
+            if (results[0].length === 0) {
+              resolve([])
+            }
+
             results[0].forEach((modPack, key) => {
               modPack.authors = JSON.parse(modPack.authors)
               if (modPack.logo === null) {

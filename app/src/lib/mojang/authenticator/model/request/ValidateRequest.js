@@ -5,15 +5,19 @@
  * @created 17/10/2016
  */
 const _accessToken = Symbol('accessToken')
+const _clientToken = Symbol('clientToken')
 
 class ValidateRequest {
   /**
    * Initialize validate request
    * @param {string} accessToken Access token
+   * @param {string} clientToken Client token
    */
-  constructor (accessToken) {
+  constructor (accessToken, clientToken) {
     // Access token
     this[_accessToken] = accessToken
+    // Client token
+    this[_clientToken] = clientToken
   }
 
   /**
@@ -25,12 +29,20 @@ class ValidateRequest {
   }
 
   /**
+   * Get client token
+   * @return {string} client token
+   */
+  get clientToken () {
+    return this[_clientToken]
+  }
+
+  /**
    * Convert the class to JSON
    * @return {Object} Property of class
    */
   toJSON () {
-    const { accessToken } = this
-    return { accessToken }
+    const { accessToken, clientToken } = this
+    return { accessToken, clientToken }
   }
 
   /**
