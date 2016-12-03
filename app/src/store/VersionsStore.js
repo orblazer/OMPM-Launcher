@@ -44,19 +44,12 @@ export default new Vuex.Store({
      * @return {Promise} The promise of initializing
      */
     initialize (store) {
-      return new Promise((resolve, reject) => {
-        sioClient.emit('getAllForgeVersions', (results) => {
-          if (store.state.forgeVersions.length <= 0) {
-            store.commit('SET_FORGEVERSIONS', results[0])
+      return new Promise((resolve) => {
+        sioClient.emit('getVersions', (versions) => {
+          store.commit('SET_FORGEVERSIONS', versions.forgeVersions)
+          store.commit('SET_MCVERSIONS', versions.mcVersions)
 
-            sioClient.emit('getMcVersions', (results2) => {
-              store.commit('SET_MCVERSIONS', results2[0])
-
-              resolve()
-            })
-          } else {
-            resolve()
-          }
+          resolve(versions)
         })
       })
     }
