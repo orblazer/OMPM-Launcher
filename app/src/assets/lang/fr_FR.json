@@ -1,10 +1,6 @@
 {
   "__NAME__": "Français (France)",
   "unknown": "Inconnu",
-  "server": {
-    "connectionLost": "La connexion au serveur à été perdue. <b>Tentative de reconnection...</b>",
-    "connected": "La connexion au serveur est rétablie."
-  },
   "components": {
     "navigation": {
       "modPacks": "Pack de mods",
@@ -12,8 +8,7 @@
       "manage": "Gestion | Editeur",
       "console": "Console",
       "settings": "Paramètres",
-      "logout": "Déconnexion",
-      "login": "Connexion"
+      "logout": "Déconnexion"
     },
     "modPack": {
       "info": {
@@ -32,14 +27,14 @@
         "tabs": {
           "core": "Mod essentiel | Mods essentiels",
           "mods": "Mod requis | Mods requis",
-          "optional": "Mod optionel | Mods optionels"
+          "optional": "Mod optionnel | Mods optionnels"
         },
         "name": "Nom",
         "version": "Version",
         "authors": "Auteur(s)",
-        "noCore": "Aucun mods n'est essentiels",
-        "noMods": "Aucun mods n'est requis",
-        "noOptional": "Aucun mods n'est optionnel"
+        "noCore": "Aucun mod n'est essentiel",
+        "noMods": "Aucun mod n'est requis",
+        "noOptional": "Aucun mod n'est optionnel"
       },
       "makeInstance": {
         "title": "Création d'une instance",
@@ -50,14 +45,14 @@
     },
     "mpEditor": {
       "selectMpLocation": "Choisissez l'archive du pack de mods",
-      "mpLocationIncorrect": "L'archive sélectionné ne contient aucun mods ou aucune configuration.",
+      "mpLocationIncorrect": "L'archive sélectionnée ne contient aucun mod ou aucune configuration.",
       "selectMpLogo": "Choisissez le logo do pack de mods",
-      "mpLogo_cantRead": "L'image sélectionné ne peut pas être chargé.",
-      "mpLogo_errorSize": "L'image sélectionné ne fait pas du 64x64 pixels.",
+      "mpLogo_cantRead": "L'image sélectionnée ne peut pas être chargée.",
+      "mpLogo_errorSize": "L'image sélectionnée ne fait pas du 64x64 pixels.",
       "_authors": "Auteur(s) du pack de mods",
       "steps": [
         {
-          "step_name": "Informations général",
+          "step_name": "Informations générales",
           "zipLocation": "Archive du packs de mods (.zip)",
           "name": "Nom de pack de mods",
           "smallDesc": "Courte description du<br>pack de mods",
@@ -66,7 +61,7 @@
           "authors_label": "@:components.mpEditor._authors<br><i>(Séparer les nom par une virgule)</i>",
           "mcVersion": "Version de Minecraft",
           "forgeVersion": "Version de forge",
-          "fVer_recommended": "recommandé",
+          "fVer_recommended": "recommandée",
           "type": "Type du pack de mods",
           "types": [
             "Public",
@@ -74,14 +69,14 @@
           ]
         },
         {
-          "step_name": "Informations supplémentaire",
+          "step_name": "Informations supplémentaires",
           "logo": "Logo du packs de mods (64x64)",
           "description": "Description complète du pack de mods",
           "changelog": "Changelog de la version"
         },
         {
           "step_name": "Vérification des mods",
-          "title": "Informations général des mods",
+          "title": "Informations générales des mods",
           "mods": {
             "name": "@:components.modPack.mods.name",
             "version": "@:components.modPack.mods.version",
@@ -93,20 +88,20 @@
             "types": [
               "Mod essentiel",
               "Mod requis",
-              "Mod optionel"
+              "Mod optionnel"
             ],
             "sides": [
-              "Des 2 côté",
+              "Des 2 côtés",
               "Serveur uniquement",
               "Client uniquement"
             ]
           },
-          "properties": "Propriétés des mods",
+          "properties": "Propriétées des mods",
           "loading": "Chargement des mods..."
         },
         {
-          "step_name": "Soumission",
-          "loading": "Envoie du pack de mods..."
+          "step_name": "Envoi du pack de mods",
+          "loading": "Envoi du pack de mods..."
         }
       ],
       "next": "SUIVANT",
@@ -121,8 +116,8 @@
       "loading": "Chargement...",
       "settings": {
         "loading": "Chargement des paramètres...",
-        "done": "Les paramètres ont été chargé.",
-        "fail": "Les paramètres n'ont pas pus être chargé."
+        "done": "Les paramètres ont été chargés.",
+        "fail": "Les paramètres n'ont pas pus être chargés."
       },
       "checkServer": {
         "loading": "Connexion au serveur...",
@@ -136,37 +131,24 @@
         "loading": "Téléchargement des mises à jour..."
       },
       "versions": {
-        "loading": "Chargement des versions disponible...",
-        "done": "Les versions disponible ont été chargé.",
-        "fail": "Les versions n'ont pas pus être chargé."
+        "loading": "Chargement des versions disponibles...",
+        "done": "Les versions disponibles ont été chargées.",
+        "fail": "Les versions n'ont pas pus être chargées."
       },
       "modPacks": {
         "loading": "Chargement des packs de mods...",
-        "done": "Les packs de mods ont été chargé.",
-        "fail": "Les packs de mods n'ont pas pus être chargé."
+        "done": "Les packs de mods ont été chargés.",
+        "fail": "Les packs de mods n'ont pas pus être chargés."
       },
       "instances": {
         "loading": "Chargement des instances...",
-        "done": "Les instances ont été chargé.",
-        "fail": "Les instances n'ont pas pus être chargé."
-      }
-    },
-    "login": {
-      "alert": {
-        "success": "Vous êtes désormais connecté.",
-        "noConnection": "La connexion avec le serveur est impossible.",
-        "already": "Vous êtes déjà connecté.",
-        "invalid": "Le nom d'utilisateur ou le mot de passe est incorrect."
-      },
-      "input": {
-        "email": "Adresse email",
-        "password": "Mot de passe",
-        "submit": "CONNEXION"
+        "done": "Les instances ont été chargées.",
+        "fail": "Les instances n'ont pas pus être chargées."
       }
     },
     "modPacks": {
       "by": "Par",
-      "created": "Créer le",
+      "created": "Crée le",
       "updated": "Dernière MAJ le"
     },
     "manage": {
@@ -194,16 +176,16 @@
         "javaHome": "Choisissez le dossier de java"
       },
       "save": {
-        "done": "Les paramètres ont bien été sauvegardé.",
-        "fail": "Les paramètres n'ont pas pus êtres sauvegardé."
+        "done": "Les paramètres ont bien été sauvegardés.",
+        "fail": "Les paramètres n'ont pas pus être sauvegardés."
       },
       "tabs": {
         "general": "Général",
         "java": "Java"
       },
-      "gameLocation": "Emplacement des dossier",
+      "gameLocation": "Emplacement des dossiers",
       "launcherVisibility": {
-        "label": "Visibilité du launcher",
+        "label": "Visibilitée du launcher",
         "always": "Garder le launcher ouvert",
         "hidden": "Cacher le launcher au lancement du jeu",
         "close": "Fermer le launcher au lancement du jeu"
@@ -214,7 +196,7 @@
         "fr_FR": "Français (France)"
       },
       "javaLocation": "Emplacement de java",
-      "allocatedRam": "RAM alloué",
+      "allocatedRam": "RAM allouée",
       "submit": "Sauvegarder"
     }
   }
