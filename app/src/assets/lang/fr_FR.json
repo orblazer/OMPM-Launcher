@@ -1,6 +1,10 @@
 {
   "__NAME__": "Français (France)",
   "unknown": "Inconnu",
+  "server": {
+    "connectionLost": "La connexion au serveur à été perdue. <b>Tentative de reconnection...</b>",
+    "connected": "La connexion au serveur est rétablie."
+    },
   "components": {
     "navigation": {
       "modPacks": "Pack de mods",
@@ -8,6 +12,7 @@
       "manage": "Gestion | Editeur",
       "console": "Console",
       "settings": "Paramètres",
+      "login": "Connexion",
       "logout": "Déconnexion"
     },
     "modPack": {
@@ -142,8 +147,23 @@
       },
       "instances": {
         "loading": "Chargement des instances...",
-        "done": "Les instances ont été chargées.",
-        "fail": "Les instances n'ont pas pus être chargées."
+        "done": "Les instances ont été chargé.",
+        "fail": "Les instances n'ont pas pus être chargé."
+      }
+    },
+       "login": {
+        "alert": {
+          "success": "Vous êtes désormais connecté.",
+          "noConnection": "La connexion avec le serveur est impossible.", 
+          "already": "Vous êtes déjà connecté.",
+          "invalid": "Le nom d'utilisateur ou le mot de passe est incorrect."
+       },
+        "input": {
+          "email": "Adresse email",
+          "password": "Mot de passe",
+          "submit": "CONNEXION"
+          "done": "Les instances ont été chargées.",
+          "fail": "Les instances n'ont pas pus être chargées."
       }
     },
     "modPacks": {
