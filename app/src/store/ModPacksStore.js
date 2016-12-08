@@ -31,7 +31,7 @@ export default new Vuex.Store({
 
           modPacks.forEach((modPack, key) => {
             if (modPack.logo === null) {
-              modPack.logo = './assets/img/defaultMp.png'
+              modPack.logo = '/assets/img/defaultMp.png'
             }
 
             store.commit('ADD_MODPACK', modPack)

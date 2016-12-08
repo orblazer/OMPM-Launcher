@@ -18,8 +18,8 @@ export default {
   store: AuthStore,
   data () {
     return {
-      email: 'dorian_du_12@hotmail.fr',
-      password: 'Extrim102',
+      email: '',
+      password: '',
       input: {
         emailClass: '',
         passwordClass: '',
@@ -42,7 +42,7 @@ export default {
       return */
 
       this.input.submitEnabled = false
-      this._authLogin({ email: this.email, password: this.password }).then((res) => {
+      this._authLogin({ email: this.email, password: this.password }).then(() => {
         LauncherLog.debug('Login successful')
         Alert.dispatch('alert', {
           message: Vue.t('pages.login.alert.success')

@@ -152,6 +152,19 @@
         "fail": "The instances could not be loaded."
       }
     },
+    "login": {
+      "alert": {
+        "success": "You are now logged in.",
+        "noConnection": "Can't connect to the server.",
+        "already": "You are already connected.",
+        "invalid": "User name or password is incorrect."
+      },
+      "input": {
+        "email": "E-mail adress",
+        "password": "Password",
+        "submit": "LOGIN"
+      }
+    },
     "modPacks": {
       "by": "By",
       "created": "Created at",

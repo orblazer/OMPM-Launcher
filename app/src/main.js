@@ -50,10 +50,6 @@ i18n(Vue).then(() => {
       }
     },
     created () {
-      setInterval(() => {
-        console.info('auth', AuthStore.getters.loggedIn)
-      }, 1000)
-
       LauncherLog.debug('Launch core...')
       this.logComputerInfo()
     },

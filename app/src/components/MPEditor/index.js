@@ -13,6 +13,7 @@ import VersionsStore from '../../store/VersionsStore'
 import SettingsStore from '../../store/SettingsStore'
 import ReadZip from '../../lib/ReadZip/ReadZip'
 import LauncherLog from '../../lib/log/LauncherLog'
+import SIOFileUploader from '../../lib/SocketIO/SIOFileUploader'
 
 const _parseMcMod = /"(modid|name|version|authors|authorList|description|mcversion)": (.*),/g
 
@@ -29,22 +30,22 @@ export default {
         smallDesc: 'Le modpack est un pack principalement orienté sur la technologie mais il contient aussi des mods magique pour plaire au plus de monde possible. Nous essayons de toujours garder les pack de mods à jour, cela permet une expérience de jeu optimale mais aussi de trouver les bugs présent dans les mods afin de les améliorer.',
         version: '1.0',
         authors: 'orblazer, buildmaxcraft, mjpyroman',
-        mcVersion: this.$store.getters.mcVersions[0].version,
-        forgeVersion: this.$store.getters.forgeVersions[1].forgeVersion,
-        type: 'public',
+        mcVersion: '1.7.10',
+        forgeVersion: '10.13.4.1614',
+        type: 'PUBLIC',
         logo: null,
-        description: '',
-        changelog: '',
+        description: 'Le modpack est un pack principalement orienté sur la technologie mais il contient aussi des mods magique pour plaire au plus de monde possible. Nous essayons de toujours garder les pack de mods à jour, cela permet une expérience de jeu optimale mais aussi de trouver les bugs présent dans les mods afin de les améliorer.',
+        changelog: 'Première version.',
         mods: []
       },
       mpLocation: '',
       mpLogo: '',
-      zipFile: null,
       step: 0,
       canNextStep: false,
       total: 0,
       current: 0,
       uploadProgress: 0,
+      uploadSpeed: '0 kB/s',
       readZip: null,
       loaded: false
     }
@@ -182,7 +183,8 @@ export default {
         this.canNextStep = this.mpLogo && this.modPack.changelog
       } else if ((this.step === 3) && this.loaded) {
         this.canNextStep = (this.modPack.mods.filter((mod) => ((mod.name.length > 0) && (mod.version.length > 0) &&
-        (mod.type.length > 0) && (mod.authors.length > 0))).length === this.modPack.mods.length)
+        (mod.type.length > 0) && (mod.authors.length > 0) && (mod.mcVersion.length > 0) && (mod.side.length > 0)))
+          .length === this.modPack.mods.length)
       }
     },
 
@@ -197,24 +199,7 @@ export default {
       if (this.step === 3) {
         this._exploreMods()
       } else if (this.step === 4) {
-        this.loaded = false
-        sioClient.uploader.submitFiles(this.zipFile)
-
-        const progressEvent = (event) => {
-          this.uploadProgress = (event.bytesLoaded / event.file.size * 100).toFixed(2)
-        }
-        const completeEvent = (event) => {
-          sioClient.uploader.removeEventListener('progress', progressEvent)
-          sioClient.uploader.removeEventListener('complete', completeEvent)
-
-          if (event.success) {
-            this.loaded = true
-            sioClient.emit('addModPack', this.modPack)
-          }
-        }
-
-        sioClient.uploader.addEventListener('progress', progressEvent)
-        sioClient.uploader.addEventListener('complete', completeEvent)
+        this._uploadFile()
       }
     },
 
@@ -258,7 +243,6 @@ export default {
             } else {
               LauncherLog.debug('The mod pack zip "' + filePaths[0] + '" is loaded')
               this.mpLocation = filePaths[0]
-              this.zipFile = fs.readFileSync(filePaths[0])
               this.nextStep()
             }
           }
@@ -292,8 +276,8 @@ export default {
           fileMD5: md5File,
           modId: '',
           name: '',
-          type: 'mods',
-          side: 'both',
+          type: 'MODS',
+          side: 'BOTH',
           version: '',
           mcVersion: '',
           authors: '',
@@ -312,8 +296,8 @@ export default {
               fileMD5: md5File,
               modId: _mod.modid || '',
               name: _mod.name || '',
-              side: 'both',
-              type: _mod.modid.includes('api') ? 'coreMods' : 'mods',
+              side: 'BOTH',
+              type: _mod.modid.toUpperCase().includes('API') ? 'CORE' : 'MODS',
               version: _mod.version || '',
               mcVersion: _mod.mcversion || '',
               description: _mod.description || '',
@@ -367,15 +351,15 @@ export default {
             mod.name = modName
           }
 
-          mod.type = mod.modId.toUpperCase().includes('API') ? 'coreMods' : 'mods'
+          mod.type = mod.modId.toUpperCase().includes('API') ? 'CORE' : 'MODS'
         } else {
           mod.modId = modName.replace(/ /, '')
           mod.name = modName
         }
 
-        sioClient.emit('getMod', mod.modId, (srvMod) => {
-          if (srvMod[0].length > 0) {
-            srvMod = srvMod[0][0]
+        sioClient.emit('getMod', md5File, (srvMod) => {
+          if (srvMod.length > 0) {
+            srvMod = srvMod[0]
             mod.name = srvMod.name
             mod.version = srvMod.version
             mod.mcVersion = srvMod.mcVersion
@@ -418,21 +402,9 @@ export default {
           const img = new Image()
           img.onload = () => {
             if ((img.naturalWidth === 64) && (img.naturalHeight === 64)) {
-              const fileReader = new FileReader()
-              fileReader.onload = (event) => {
-                this.modPack.logo = event.target.result
-
-                this.mpLogo = filePaths[0]
-                LauncherLog.debug('The logo "' + filePaths[0] + '" is loaded')
-              }
-              fileReader.onabort = fileReader.onerror = () => {
-                LauncherLog.debug('The logo "' + filePaths[0] + '" can\'t read')
-                Alert.dispatch('alert', {
-                  type: 'error',
-                  message: Vue.t('components.mpEditor.mpLogo_cantRead')
-                })
-              }
-              fileReader.readAsArrayBuffer(fs.readFileSync(filePaths[0]))
+              this.modPack.logo = fs.readFileSync(filePaths[0], 'base64')
+              this.mpLogo = filePaths[0]
+              LauncherLog.debug('The logo "' + filePaths[0] + '" is loaded')
             } else {
               LauncherLog.debug('The logo "' + filePaths[0] + '" not 64x64')
               Alert.dispatch('alert', {
@@ -443,6 +415,47 @@ export default {
           }
           img.src = filePaths[0]
         }
+      })
+    },
+
+    /**
+     * Upload the file
+     * @private
+     */
+    _uploadFile () {
+      this.loaded = false
+      const siofu = new SIOFileUploader(sioClient)
+      siofu.upload(this.mpLocation)
+
+      siofu.on('start', (fileInfo) => {
+        console.log('Start uploading', fileInfo)
+      })
+      siofu.on('stream', (fileInfo, srvFileSize, uplSpeed) => {
+        this.uploadProgress = ((srvFileSize / fileInfo.size) * 100).toFixed(2)
+
+        if (typeof uplSpeed === 'number') {
+          if (uplSpeed < 1024) { // 1 kB
+            this.uploadSpeed = uplSpeed.toFixed(2) + ' B/s'
+          } else if (uplSpeed < 1048576) { // 1 mB
+            this.uploadSpeed = (uplSpeed / 1024).toFixed(2) + ' kB/s'
+          } else if (uplSpeed < 1073741824) { // 1 gB
+            this.uploadSpeed = (uplSpeed / 1048576).toFixed(2) + ' mB/s'
+          } else {
+            this.uploadSpeed = (uplSpeed / 1073741824).toFixed(2) + ' gB/s'
+          }
+        }
+      })
+      siofu.on('complete', (fileInfo) => {
+        console.log('Upload Complete', fileInfo)
+
+        this.loaded = true
+        sioClient.emit('addModPack', this.modPack)
+      })
+      siofu.on('error', (err) => {
+        console.log('Error!', err)
+      })
+      siofu.on('abort', (fileInfo) => {
+        console.log('Aborted: ', fileInfo)
       })
     }
   }

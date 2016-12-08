@@ -7,7 +7,6 @@
 export const generateUUID = () => {
   let d = new Date().getTime()
   if (window.performance && typeof window.performance.now === 'function') {
-    // noinspection Eslint
     d += performance.now() // use high-precision timer if available
   }
 

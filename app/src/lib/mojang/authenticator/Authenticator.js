@@ -44,7 +44,7 @@ class Authenticator {
    * @return {Promise} Promise of auth response
    */
   authenticate (agent = null, username, password, clientToken = '') {
-    const request = new Request.Auth(agent, this._trim(username), this._trim(password), this._trim(clientToken))
+    const request = new Request.Auth(agent, Authenticator._trim(username), Authenticator._trim(password), Authenticator._trim(clientToken))
     return this._sendRequest(request, AuthResponse, this._authPoints.getAuthenticatePoint())
   }
 
@@ -58,7 +58,7 @@ class Authenticator {
    * @return {Promise} Promise of refresh response
    */
   refresh (accessToken, clientToken = '', selectedProfile = null) {
-    const request = new Request.Refresh(this._trim(accessToken), this._trim(clientToken), selectedProfile)
+    const request = new Request.Refresh(Authenticator._trim(accessToken), Authenticator._trim(clientToken), selectedProfile)
     return this._sendRequest(request, RefreshResponse, this._authPoints.getRefreshPoint())
   }
 
@@ -71,7 +71,7 @@ class Authenticator {
    * @return {Promise} Promise of validate access token
    */
   validate (accessToken, clientToken = '') {
-    const request = new Request.Validate(this._trim(accessToken), this._trim(clientToken))
+    const request = new Request.Validate(Authenticator._trim(accessToken), Authenticator._trim(clientToken))
     return this._sendRequest(request, null, this._authPoints.getValidatePoint())
   }
 
@@ -84,7 +84,7 @@ class Authenticator {
    * @return {Promise} Promise of invalidates access token
    */
   signout (username, password) {
-    const request = new Request.Signout(this._trim(username), this._trim(password))
+    const request = new Request.Signout(Authenticator._trim(username), Authenticator._trim(password))
     return this._sendRequest(request, null, this._authPoints.getSignoutPoint())
   }
 
@@ -97,7 +97,7 @@ class Authenticator {
    * @return {Promise} Promise of invalidates access token
    */
   invalidate (accessToken, clientToken = '') {
-    const request = new Request.Invalidate(this._trim(accessToken), this._trim(clientToken))
+    const request = new Request.Invalidate(Authenticator._trim(accessToken), Authenticator._trim(clientToken))
     return this._sendRequest(request, null, this._authPoints.getInvalidatePoint())
   }
 
@@ -142,7 +142,9 @@ class Authenticator {
     })
   }
 
-  _trim (str) {
+  static _trim (str) {
+    if (!str) return ''
+
     return str.replace(/^\s*|\s*$/g, '')
   }
 }

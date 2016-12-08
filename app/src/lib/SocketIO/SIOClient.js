@@ -95,5 +95,22 @@ class SIOClient {
   on (channel, callback) {
     this[_sio].on(channel, callback)
   }
+
+  /**
+   * Receive message from Socket.IO (one time)
+   * @param {string} channel The channel of message
+   * @param {function} callback The callback of message
+   */
+  once (channel, callback) {
+    this[_sio].once(channel, callback)
+  }
+
+  /**
+   * Remove all listeners
+   * @param {string} listener The listener
+   */
+  removeAllListeners (listener) {
+    this[_sio].removeAllListeners.call(this, arguments)
+  }
 }
 export default SIOClient

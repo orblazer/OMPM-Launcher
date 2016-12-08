@@ -7,12 +7,13 @@
 import Vuex from 'vuex'
 import Authenticator from '../lib/mojang/authenticator/Authenticator'
 import AuthPoints from '../lib/mojang/authenticator/AuthPoints'
-import AuthAgent from '../lib/mojang/authenticator/model/AuthAgent'
+// import AuthAgent from '../lib/mojang/authenticator/model/AuthAgent'
 import AuthProfile from '../lib/mojang/authenticator/model/AuthProfile'
 import AuthInfo from '../lib/mojang/minecraft/AuthInfo'
 import AuthenticationException from '../lib/mojang/authenticator/AuthenticationException'
 import AuthError from '../lib/mojang/authenticator/model/AuthError'
-import { generateUUID } from '../lib/uuid'
+// import { generateUUID } from '../lib/uuid'
+import ManageStore from './ManageStore'
 
 export default new Vuex.Store({
   strict: true,
@@ -47,6 +48,7 @@ export default new Vuex.Store({
      * @constructor
      */
     USER_LOGIN (state, user) {
+      state.accessToken = user.uuid
       state.user = user
     },
 
@@ -79,26 +81,43 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         const auth = new Authenticator(Authenticator.MOJANG_AUTH_URL, AuthPoints.NORMAL_AUTH_POINTS)
 
+        sioClient.emit('login', '2df03368a4c64b058807fca12ab50134', (user) => {
+          ManageStore.dispatch('initialize')
+          store.commit('USER_LOGIN', user)
+          resolve({ accessToken: store.state.accessToken })
+        })
+        sioEvent.once('connected', () => {
+          sioClient.emit('login', '2df03368a4c64b058807fca12ab50134', (user) => {
+            console.info('Auto reconnect')
+
+            ManageStore.dispatch('initialize')
+            store.commit('USER_LOGIN', user)
+          })
+        })
+
         if (!store.getters.loggedIn) {
-          auth.authenticate(AuthAgent.MINECRAFT, email, password, generateUUID().replace(/-/g, '')).then((response) => {
-            store.commit('LOGIN', {
-              auth: new AuthInfo(response.selectedProfile.name, response.accessToken, response.clientToken, response.selectedProfile.id),
-              email: email,
-              password: password
-            })
+          /* auth.authenticate(AuthAgent.MINECRAFT, email, password, generateUUID().replace(/-/g, '')).then((response) => {
+           store.commit('LOGIN', {
+           auth: new AuthInfo(response.selectedProfile.name, response.accessToken, response.clientToken, response.selectedProfile.id),
+           email: email,
+           password: password
+           })
 
-            sioClient.emit('login', response.selectedProfile.id, (user) => {
-              store.commit('USER_LOGIN', user)
-            })
-            sioEvent.once('connected', () => {
-              sioClient.emit('login', response.selectedProfile.id, (user) => {
-                console.info('Auto reconnect')
-                store.commit('USER_LOGIN', user)
-              })
-            })
+           sioClient.emit('login', response.selectedProfile.id, (user) => {
+           ManageStore.dispatch('initialize')
+           store.commit('USER_LOGIN', user)
+           })
+           sioEvent.once('connected', () => {
+           sioClient.emit('login', response.selectedProfile.id, (user) => {
+           console.info('Auto reconnect')
 
-            resolve({ token: store.state.token, auth: store.state.auth })
-          }).catch(reject)
+           ManageStore.dispatch('initialize')
+           store.commit('USER_LOGIN', user)
+           })
+           })
+
+           resolve({ accessToken: store.state.accessToken, auth: store.state.auth })
+           }).catch(reject)*/
         } else {
           auth.validate(store.getters.accessToken, store.getters.auth.clientToken).then(() => {
             resolve({ token: store.state.token, auth: store.state.auth })
@@ -129,13 +148,19 @@ export default new Vuex.Store({
     logout (store) {
       return new Promise((resolve, reject) => {
         if (store.getters.loggedIn) {
-          const auth = new Authenticator(Authenticator.MOJANG_AUTH_URL, AuthPoints.NORMAL_AUTH_POINTS)
+          store.commit('LOGOUT')
+          sioClient.emit('logout')
+          ManageStore.dispatch('reset')
+
+          /* const auth = new Authenticator(Authenticator.MOJANG_AUTH_URL, AuthPoints.NORMAL_AUTH_POINTS)
+
           auth.signout(store.state.email, store.state.password).then(() => {
             store.commit('LOGOUT')
             sioClient.emit('logout')
+            ManageStore.dispatch('reset')
 
             resolve()
-          }).catch(reject)
+          }).catch(reject)*/
         } else {
           reject(new AuthenticationException(new AuthError('IllegalStateException', 'You are not connected')))
         }

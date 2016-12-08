@@ -76,8 +76,8 @@
           <div class="input-control">
             <label for="mpType">{{$t('components.mpEditor.steps[0].type')}}</label>
             <select id="mpType" v-model="modPack.type" required>
-              <option value="public">{{$t('components.mpEditor.steps[0].types[0]')}}</option>
-              <option value="private">{{$t('components.mpEditor.steps[0].types[1]')}}</option>
+              <option value="PUBLIC">{{$t('components.mpEditor.steps[0].types[0]')}}</option>
+              <option value="PRIVATE">{{$t('components.mpEditor.steps[0].types[1]')}}</option>
             </select>
           </div>
 
@@ -162,14 +162,14 @@
                 <option v-for="mcVersion in mcVersions" :value="mcVersion.version">{{mcVersion.version}}</option>
               </select></td>
               <td><select v-model="mod.type" required>
-                <option value="core">{{$t('components.mpEditor.steps[2].mods.types[0]')}}</option>
-                <option value="mods">{{$t('components.mpEditor.steps[2].mods.types[1]')}}</option>
-                <option value="optional">{{$t('components.mpEditor.steps[2].mods.types[2]')}}</option>
+                <option value="CORE">{{$t('components.mpEditor.steps[2].mods.types[0]')}}</option>
+                <option value="MODS">{{$t('components.mpEditor.steps[2].mods.types[1]')}}</option>
+                <option value="OPTIONAL">{{$t('components.mpEditor.steps[2].mods.types[2]')}}</option>
               </select></td>
               <td><select v-model="mod.side" required>
-                <option value="both">{{$t('components.mpEditor.steps[2].mods.sides[0]')}}</option>
-                <option value="server">{{$t('components.mpEditor.steps[2].mods.sides[1]')}}</option>
-                <option value="client">{{$t('components.mpEditor.steps[2].mods.sides[2]')}}</option>
+                <option value="BOTH">{{$t('components.mpEditor.steps[2].mods.sides[0]')}}</option>
+                <option value="SERVER">{{$t('components.mpEditor.steps[2].mods.sides[1]')}}</option>
+                <option value="CLIENT">{{$t('components.mpEditor.steps[2].mods.sides[2]')}}</option>
               </select></td>
             </tr>
             </tbody>
@@ -195,7 +195,7 @@
         </template>
 
         <ProgressBar class="uploading" :progress="Number(uploadProgress)" v-else>
-          {{$t('components.mpEditor.steps[3].loading')}} ({{uploadProgress}} %)
+          {{$t('components.mpEditor.steps[3].loading')}} ({{uploadProgress}} %, {{uploadSpeed}})
         </ProgressBar>
       </li>
     </ul>
